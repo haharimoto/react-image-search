@@ -1,13 +1,18 @@
 import React from 'react'
 import Image from './Image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
-  // need 2 more states (favorite & filtered array of images)
-  // const [favorite, setFavorite] = useState(false)
-  // const [filtered, setFiltered] = useState([])
+  const [filtered, setFiltered] = useState([])
+  // ?filtered array is undefined after appending
+  // ?likely due to not being able to access specific object(el)
+  // ?error: 'react state is not iteratable' after 2nd toggle
+
+  useEffect(() => {
+    console.log(filtered)
+  }, [filtered])
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -17,7 +22,6 @@ function Main() {
   // display image-list when user press search button
   function handleSubmit(event) {
     event.preventDefault()
-    console.log('submitted')
     // interpolate input state and .env variable to API
     fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       .then(res => res.json())
@@ -46,11 +50,14 @@ function Main() {
         </div>
       </div>
 
-      <div className='main--image-list mt-5 mx-2'>
+      <div className='main--image-list mt-5 mx-2 pb-5'>
         {allImages.map(el => (
           <Image
             key={el.id}
             {...el}
+            el={el}
+            like={el.liked_by_user}
+            setFiltered={setFiltered}
           />
         ))}
       </div>
