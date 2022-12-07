@@ -1,37 +1,24 @@
 import React from 'react'
-import { useState } from 'react'
 
 function Image(props) {
-  const [status, setStatus] = useState(props.like)
-
-  // if an image is liked, it will be appended to filtered array
-  // then filtered array will be mapped to display liked images
-  function appendObject() {
-    console.log('appended')
-    props.setFiltered(prevState => {
-      if (status === true) {
-        return [
-          ...prevState,
-          {id: "id"}
-          // {id: props.key, img: props.urls.regular}
-        ]
-      }
+  function handleLike() {
+    // if props.isLiked is true, remove el from favorites array
+    // if false, append el to favorites array
+    // ?props.isLiked is false by default
+    props.isLiked ?
+    props.setFavorites(props.favorites.filter(el => el.id !== props.el.id)) :
+    props.setFavorites(prevState => {
+      return [
+        ...prevState,
+        { id: props.id, isLiked: true, img: props.urls.regular }
+      ]
     })
   }
-  function toggleLike() {
-    setStatus(prevState => !prevState)
-    appendObject()
-  }
-
-  let check = Boolean(status)
-  console.log(`check is ${check}`)
-  // props.like is false by default?
-  console.log(props.el)
 
   return (
     <div className='image'>
       <img src={props.urls.regular} alt="" loading='lazy' />
-      <button className={status ? 'image--liked' : 'image--like'} onClick={toggleLike}>
+      <button className={props.isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
         ❤
       </button>
     </div>
@@ -40,17 +27,23 @@ function Image(props) {
 
 export default Image
 
+
 // below does not work
 
 // props.status = props.like
 // props.setStatus(prevState => !prevState)
 // cannot do this bc 'read only property error'
 
-// props.setFiltered(props.allImages.map(el => {
-//   if (el.id === props.el.id) {
-//     return {
-//       ...el,
-//       like: !el.like
+// function appendObject() {
+//   console.log('appended')
+//   props.setFiltered(prevState => {
+//     if (status === true) {
+//       return [
+//         ...prevState,
+
+//        props.image,
+//         // {id: props.key, img: props.urls.regular}
+//       ]
 //     }
-//   }
-//   return el
+//   })
+// }

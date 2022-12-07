@@ -5,14 +5,12 @@ import { useState, useEffect } from 'react'
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
-  const [filtered, setFiltered] = useState([])
-  // ?filtered array is undefined after appending
-  // ?likely due to not being able to access specific object(el)
-  // ?error: 'react state is not iteratable' after 2nd toggle
+  const [favorites, setFavorites] = useState(() => JSON.parse(localStorage.getItem("favorites")) || [])
 
   useEffect(() => {
-    console.log(filtered)
-  }, [filtered])
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+    console.log(favorites)
+  }, [favorites])
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -20,13 +18,30 @@ function Main() {
 
   // display nothing by default
   // display image-list when user press search button
-  function handleSubmit(event) {
-    event.preventDefault()
-    // interpolate input state and .env variable to API
-    fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-      .then(res => res.json())
-      .then(data => setAllImages(data.results))
+  // function handleSubmit(event) {
+  //   event.preventDefault()
+  //   // interpolate input state and .env variable to API
+  //   fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+  //     .then(res => res.json())
+  //     .then(data => setAllImages(data.results))
+  // }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const data = await res.json();
+      setAllImages(data.results)
+    } catch(error) {
+      alert("Sum ting wong");
+    }
   }
+
+  // use parameter 'id' to read specific one
+  function isLiked(id) {
+    return favorites.find(el => el.id === id) ? true : false
+  }
+
 
   return (
     <main>
@@ -54,10 +69,13 @@ function Main() {
         {allImages.map(el => (
           <Image
             key={el.id}
+            // do need spread operator below for img's src to work in Image.js
             {...el}
             el={el}
-            like={el.liked_by_user}
-            setFiltered={setFiltered}
+            isLiked={isLiked(el.id)}
+            favorites={favorites}
+            setFavorites={setFavorites}
+
           />
         ))}
       </div>
