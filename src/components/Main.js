@@ -25,11 +25,10 @@ function Main() {
   //     .then(res => res.json())
   //     .then(data => setAllImages(data.results))
   // }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=50&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
     } catch(error) {
@@ -41,7 +40,6 @@ function Main() {
   function isLiked(id) {
     return favorites.find(el => el.id === id) ? true : false
   }
-
 
   return (
     <main>
@@ -65,7 +63,7 @@ function Main() {
         </div>
       </div>
 
-      <div className='main--image-list mt-5 mx-2 pb-5'>
+      <div className='main--image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
             key={el.id}

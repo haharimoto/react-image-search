@@ -14,7 +14,7 @@ main {
 
 img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .main--top {
@@ -32,18 +32,17 @@ img {
 }
 
 .main--image-list {
-  /* border: 1px dashed black; */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 220px);
-  grid-auto-flow: row dense;
-  justify-content: center;
-  gap: 10px;
+  /* border: 1px dashed; */
+  column-count: 5;
+  column-gap: 7px;
+  margin: 0px 150px;
   min-height: 100vh;
-  /* to get rid of unwanted white space at the bottom */
+    /* to get rid of unwanted white space at the bottom */
 }
 
 .image {
   position: relative;
+  margin-bottom: 7px;
 }
 
 .image--like {
@@ -54,7 +53,8 @@ img {
   opacity: 30%;
   border-radius: 5px;
   border: none;
-  filter: saturate(10%);
+  filter: saturate(15%);
+  transition: 0.5s;
 }
 
 .image--like:hover {
@@ -70,4 +70,28 @@ img {
   border-radius: 5px;
   border: none;
   filter: saturate(10%);
+}
+
+@media(max-width: 1150px) {
+  .main--image-list {
+    column-count: 4;
+  }
+}
+
+@media(max-width: 992px) {
+  .main--image-list {
+    column-count: 3;
+  }
+}
+
+@media(max-width: 768px) {
+  .main--image-list {
+    column-count: 2;
+  }
+}
+
+@media(max-width: 600px) {
+  .main--image-list {
+    column-count: 1;
+  }
 }

@@ -15,6 +15,8 @@ function Image(props) {
     })
   }
 
+  // console.log(props.height)
+
   return (
     <div className='image'>
       <img src={props.urls.regular} alt="" loading='lazy' />
