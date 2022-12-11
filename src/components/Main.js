@@ -1,6 +1,9 @@
 import React from 'react'
+import Header from './Header'
 import Image from './Image'
 import { useState, useEffect } from 'react'
+// import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 function Main() {
   const [input, setInput] = useState('')
@@ -9,7 +12,7 @@ function Main() {
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites))
-    console.log(favorites)
+    console.log(`favorites: ${favorites}`)
   }, [favorites])
 
   function handleChange(event) {
@@ -25,16 +28,21 @@ function Main() {
   //     .then(res => res.json())
   //     .then(data => setAllImages(data.results))
   // }
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=50&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
     } catch(error) {
       alert("Sum ting wong");
     }
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    fetchImages()
+  }
+  console.log(`allImages: ${allImages.length}`);
 
   // use parameter 'id' to read specific one
   function isLiked(id) {
@@ -43,40 +51,33 @@ function Main() {
 
   return (
     <main>
-      <div className='main--top'>
-        <h4 className='text-center text-light pt-4'>Find Images</h4>
-        <div className='main--form pt-1 pb-4'>
-          <form onSubmit={handleSubmit}>
-            <input
-              className='form--input'
-              autoComplete='off'
-              type='text'
-              placeholder='Search'
-              onChange={handleChange}
-              name='input'
-              value={input}
+      <Header
+        input={input}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+
+      {/* <InfiniteScroll
+        dataLength={allImages.length} //This is important field to render the next data
+        next={fetchImages}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+      > */}
+        <div className='main--image-list mt-5 pb-5'>
+          {allImages.map(el => (
+            <Image
+              key={el.id}
+              // do need spread operator below for img's src to work in Image.js
+              {...el}
+              el={el}
+              isLiked={isLiked(el.id)}
+              favorites={favorites}
+              setFavorites={setFavorites}
+
             />
-            <button className='form--button'>
-              🍳
-            </button>
-          </form>
+          ))}
         </div>
-      </div>
-
-      <div className='main--image-list mt-5 pb-5'>
-        {allImages.map(el => (
-          <Image
-            key={el.id}
-            // do need spread operator below for img's src to work in Image.js
-            {...el}
-            el={el}
-            isLiked={isLiked(el.id)}
-            favorites={favorites}
-            setFavorites={setFavorites}
-
-          />
-        ))}
-      </div>
+      {/* </InfiniteScroll> */}
     </main>
   )
 }

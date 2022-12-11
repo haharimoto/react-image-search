@@ -10,7 +10,7 @@ function Image(props) {
     props.setFavorites(prevState => {
       return [
         ...prevState,
-        { id: props.id, isLiked: true, img: props.urls.regular }
+        { id: props.id, isLiked: true, img: props.urls.small }
       ]
     })
   }
@@ -19,7 +19,7 @@ function Image(props) {
 
   return (
     <div className='image'>
-      <img src={props.urls.regular} alt="" loading='lazy' />
+      <img src={props.urls.small} alt="" loading='lazy' />
       <button className={props.isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
         ❤
       </button>
@@ -28,6 +28,8 @@ function Image(props) {
 }
 
 export default Image
+
+
 
 
 // below does not work

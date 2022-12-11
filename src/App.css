@@ -17,17 +17,17 @@ img {
   border-radius: 2px;
 }
 
-.main--top {
+.header {
   background-color: #0d1117;
 }
 
-.main--form {
+.header--form {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form--input {
+.header--form--input {
   text-indent: 4px;
 }
 
