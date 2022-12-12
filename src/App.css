@@ -29,6 +29,13 @@ img {
 
 .header--form--input {
   text-indent: 4px;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.shared-header-navbar {
+  height: 142.68px;
+  background-color: #0d1117;
 }
 
 .main--image-list {
@@ -81,6 +88,7 @@ img {
 @media(max-width: 992px) {
   .main--image-list {
     column-count: 3;
+    margin: 0px 100px;
   }
 }
 
@@ -93,5 +101,6 @@ img {
 @media(max-width: 600px) {
   .main--image-list {
     column-count: 1;
+    margin: 0px 50px;
   }
 }
