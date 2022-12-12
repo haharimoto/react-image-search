@@ -12,7 +12,7 @@ function Main() {
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites))
-    console.log(`favorites: ${favorites}`)
+    console.log(favorites)
   }, [favorites])
 
   function handleChange(event) {
