@@ -1,10 +1,14 @@
 import React from 'react'
 import SharedHeader from '../SharedHeader'
 
-function Favorites() {
+function Favorites(props) {
   return (
     <div>
       <SharedHeader />
+      <div className='favorite-images'>
+        {/* favorites state */}
+
+      </div>
     </div>
   )
 }

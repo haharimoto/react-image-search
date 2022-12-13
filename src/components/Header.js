@@ -5,8 +5,8 @@ function Header(props) {
   return (
     <div className='header'>
       <div className='header--navbar'>
-        <Link className='header--home' to='/'>🏚</Link>
-        <Link className='header--favorites' to='/favorites'>❤</Link>
+        <Link className='header--navbar--home' to='/'>🏚</Link>
+        <Link className='header--navbar--favorites' to='/favorites'>❤</Link>
       </div>
       <h4 className='text-center text-light pt-4'>Find Images</h4>
       <div className='header--form pt-1 pb-4'>

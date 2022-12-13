@@ -30,7 +30,7 @@ function Main() {
   // }
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
     } catch(error) {
