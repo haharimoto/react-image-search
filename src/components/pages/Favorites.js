@@ -1,12 +1,22 @@
 import React from 'react'
-import SharedHeader from '../SharedHeader'
+// import SharedHeader from '../SharedHeader'
+import create from 'zustand'
 
-function Favorites(props) {
+
+// Zustand
+export const useFavorite = create((set) => ({
+  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+  setFavorites: (favorites) => set({favorites})
+}))
+
+
+function Favorites() {
+
   return (
     <div>
-      <SharedHeader />
+      {/* <SharedHeader /> */}
       <div className='favorite-images'>
-        {/* favorites state */}
+
 
       </div>
     </div>
@@ -14,3 +24,9 @@ function Favorites(props) {
 }
 
 export default Favorites
+
+
+  // Zustand EXAMPLE:
+  // bears: 0,
+  // increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  // removeAllBears: () => set({ bears: 0 }),

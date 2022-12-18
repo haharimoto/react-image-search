@@ -2,16 +2,17 @@ import React from 'react'
 import Header from './Header'
 import Image from './Image'
 import { useState, useEffect } from 'react'
+import useFavorite from './pages/Favorites'
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
-  const [favorites, setFavorites] = useState(() => JSON.parse(localStorage.getItem("favorites")) || [])
 
+  const favorites = useFavorite(state => state.favorites)
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites))
+    // localStorage.setItem("favorites", JSON.stringify(favorites))
     console.log(favorites)
   }, [favorites])
 
@@ -42,12 +43,6 @@ function Main() {
     event.preventDefault();
     fetchImages()
   }
-  console.log(`allImages: ${allImages.length}`);
-
-  // use parameter 'id' to read specific one
-  function isLiked(id) {
-    return favorites.find(el => el.id === id) ? true : false
-  }
 
   return (
     <main>
@@ -70,10 +65,6 @@ function Main() {
               // do need spread operator below for img's src to work in Image.js
               {...el}
               el={el}
-              isLiked={isLiked(el.id)}
-              favorites={favorites}
-              setFavorites={setFavorites}
-
             />
           ))}
         </div>

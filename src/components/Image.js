@@ -1,26 +1,29 @@
 import React from 'react'
+import { useFavorite } from './pages/Favorites'
+
 
 function Image(props) {
-  function handleLike() {
-    // if props.isLiked is true, remove el from favorites array
-    // if false, append el to favorites array
-    // ?props.isLiked is false by default
-    props.isLiked ?
-    props.setFavorites(props.favorites.filter(el => el.id !== props.el.id)) :
-    props.setFavorites(prevState => {
-      return [
-        ...prevState,
-        { id: props.id, isLiked: true, img: props.urls.small }
-      ]
-    })
-  }
+  const favorites = useFavorite(state => state.favorites)
+  const setFavorites = useFavorite(state => state.setFavorites)
 
-  // console.log(props.height)
+  // if image(el) exist in favorites array, remove el from favorites array
+  // if not, append to favorites array
+  const isLiked = favorites.find(el => el.id === props.el.id) ? true : false
+  function handleLike() {
+    if(isLiked) {
+      setFavorites(favorites.filter(el => el.id !== props.el.id))
+    } else {
+      setFavorites([
+        ...favorites,
+        props.el
+      ])
+    }
+  }
 
   return (
     <div className='image'>
       <img src={props.urls.small} alt="" loading='lazy' />
-      <button className={props.isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
+      <button className={isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
         ❤
       </button>
     </div>
@@ -28,26 +31,3 @@ function Image(props) {
 }
 
 export default Image
-
-
-
-
-// below does not work
-
-// props.status = props.like
-// props.setStatus(prevState => !prevState)
-// cannot do this bc 'read only property error'
-
-// function appendObject() {
-//   console.log('appended')
-//   props.setFiltered(prevState => {
-//     if (status === true) {
-//       return [
-//         ...prevState,
-
-//        props.image,
-//         // {id: props.key, img: props.urls.regular}
-//       ]
-//     }
-//   })
-// }
