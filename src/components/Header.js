@@ -1,15 +1,23 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import Navbar from './Navbar'
+// import { useLocation } from 'react-router-dom'
+
+
 
 function Header(props) {
+  // const location = useLocation()
+  // let style
+  // if (location.pathname === '/') {
+  //   style = { height: 'auto' }
+  // } else {
+  //   style = { height: '126.26px' }
+  // }
+
   return (
     <div className='header'>
-      {/* <div className='header--navbar'>
-        <Link className='header--navbar--home' to='/'>🏚</Link>
-        <Link className='header--navbar--favorites' to='/favorites'>❤</Link>
-      </div> */}
-      <h4 className='text-center text-light pt-4'>Find Images</h4>
-      <div className='header--form pt-1 pb-4'>
+      <Navbar />
+      <h4 className='text-center text-light'>Find Images</h4>
+      <div className='header--form pt-1'>
         <form onSubmit={props.handleSubmit}>
           <input
             className='header--form--input'

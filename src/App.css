@@ -21,17 +21,18 @@ img {
   background-color: #0d1117;
 }
 
-.header--navbar {
-  padding-left: 8px;
+.nav {
+  background-color: #0d1117;
+  padding-left: 8px !important;
   padding-top: 4px;
 }
 
-.header--navbar--home {
+.nav--home {
   text-decoration: none;
   filter: saturate(15%);
 }
 
-.header--navbar--favorites {
+.nav--favorites {
   text-decoration: none;
   filter: saturate(15%);
 }
@@ -40,6 +41,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 28px;
 }
 
 .header--form--input {
@@ -48,7 +50,7 @@ img {
   width: 300px;
 }
 
-.shared-header-navbar {
+/* .shared-header-navbar {
   height: 147.5px;
   background-color: #0d1117;
   padding-left: 8px;
@@ -63,7 +65,7 @@ img {
 .shared-header-navbar--favorites {
   text-decoration: none;
   filter: saturate(15%);
-}
+} */
 
 
 .main--image-list {

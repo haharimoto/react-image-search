@@ -1,10 +1,11 @@
 import React from 'react'
-import SharedHeader from '../SharedHeader'
+import Navbar from '../Navbar'
+
 
 function Error() {
   return (
     <div>
-      <SharedHeader />
+      <Navbar />
       <b>404</b>
     </div>
   )

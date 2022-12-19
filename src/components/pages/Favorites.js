@@ -1,30 +1,29 @@
 import React from 'react'
-// import SharedHeader from '../SharedHeader'
-import create from 'zustand'
+import Navbar from '../Navbar'
+// import create from 'zustand'
+// import { persist } from 'zustand/middleware'
 
 
 // Zustand
-export const useFavorite = create((set) => ({
-  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
-  setFavorites: (favorites) => set({favorites})
-}))
+// export const useFavorite = create((set) => ({
+//   favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+//   setFavorites: (favorites) => set({favorites}),
+// }))
 
 
 function Favorites() {
 
   return (
     <div>
-      {/* <SharedHeader /> */}
-      <div className='favorite-images'>
-
-
+      <Navbar />
+      <div className='favorites'>
+      Favorites
       </div>
     </div>
   )
 }
 
 export default Favorites
-
 
   // Zustand EXAMPLE:
   // bears: 0,

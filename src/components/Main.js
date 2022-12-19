@@ -2,17 +2,18 @@ import React from 'react'
 import Header from './Header'
 import Image from './Image'
 import { useState, useEffect } from 'react'
-import useFavorite from './pages/Favorites'
+// import useFavorite from './pages/Favorites'
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
+  const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favorites")) || [])
 
-  const favorites = useFavorite(state => state.favorites)
+  // const favorites = useFavorite(state => state.favorites)
   useEffect(() => {
-    // localStorage.setItem("favorites", JSON.stringify(favorites))
+    localStorage.setItem("favorites", JSON.stringify(favorites))
     console.log(favorites)
   }, [favorites])
 
@@ -22,6 +23,7 @@ function Main() {
 
   // display nothing by default
   // display image-list when user press search button
+
   // function handleSubmit(event) {
   //   event.preventDefault()
   //   // interpolate input state and .env variable to API
@@ -31,7 +33,7 @@ function Main() {
   // }
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=10  &query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
     } catch(error) {
@@ -65,6 +67,9 @@ function Main() {
               // do need spread operator below for img's src to work in Image.js
               {...el}
               el={el}
+
+              favorites={favorites}
+              setFavorites={setFavorites}
             />
           ))}
         </div>
@@ -74,3 +79,11 @@ function Main() {
 }
 
 export default Main
+
+
+// localStorage.setItem("favorites", JSON.stringify(favorites, function(key, value) {
+//   if (key === '_self' || key === '_source') {
+//     return null
+//   }
+//   return value
+// }))
