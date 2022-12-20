@@ -1,21 +1,13 @@
 import React from 'react'
 import Header from './Header'
 import Image from './Image'
-import { useState, useEffect } from 'react'
-// import useFavorite from './pages/Favorites'
+import { useState } from 'react'
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
-  const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem("favorites")) || [])
-
-  // const favorites = useFavorite(state => state.favorites)
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites))
-    console.log(favorites)
-  }, [favorites])
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -67,9 +59,6 @@ function Main() {
               // do need spread operator below for img's src to work in Image.js
               {...el}
               el={el}
-
-              favorites={favorites}
-              setFavorites={setFavorites}
             />
           ))}
         </div>
@@ -81,9 +70,9 @@ function Main() {
 export default Main
 
 
-// localStorage.setItem("favorites", JSON.stringify(favorites, function(key, value) {
-//   if (key === '_self' || key === '_source') {
-//     return null
-//   }
-//   return value
-// }))
+  // const favorites = useFavorite(state => state.favorites)
+  // useEffect(() => {
+  //   // localStorage.setItem("favorites", JSON.stringify(favorites))
+  //   // console.log(favorites)
+  //   console.log('0');
+  // }, [favorites])

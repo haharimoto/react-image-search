@@ -1,25 +1,23 @@
 import React from 'react'
-// import { useFavorite } from './pages/Favorites'
+import { useFavorite } from './pages/Favorites'
 
 
 function Image(props) {
-  // const favorites = useFavorite(state => state.favorites)
+  const favorites = useFavorite(state => state.favorites)
   // const setFavorites = useFavorite(state => state.setFavorites)
+  const filter = useFavorite(state => state.filter)
+  const add = useFavorite(state => state.add)
 
   // if image(el) exist in favorites array, remove el from favorites array
   // if not, append to favorites array
-  const isLiked = props.favorites.find(el => el.id === props.el.id) ? true : false
+  const isLiked = favorites.find(el => el.id === props.el.id) ? true : false
   function handleLike() {
     if(isLiked) {
-      props.setFavorites(props.favorites.filter(el => el.id !== props.el.id))
+      filter(el => el.id !== props.el.id)
     } else {
-      props.setFavorites([
-        ...props.favorites,
-        props.el
-      ])
+      add(props.el)
     }
   }
-  // console.log(favorites);
 
   return (
     <div className='image'>
@@ -32,3 +30,16 @@ function Image(props) {
 }
 
 export default Image
+
+
+// const isLiked = favorites.find(el => el.id === props.el.id) ? true : false
+// function handleLike() {
+//   if(isLiked) {
+//     setFavorites(favorites.filter(el => el.id !== props.el.id))
+//   } else {
+//     setFavorites([
+//       ...favorites,
+//       props.el
+//     ])
+//   }
+// }

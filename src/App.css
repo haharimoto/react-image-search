@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-
+  background-color: rgb(177, 177, 177) !important;
 }
 
 main {
@@ -50,31 +50,13 @@ img {
   width: 300px;
 }
 
-/* .shared-header-navbar {
-  height: 147.5px;
-  background-color: #0d1117;
-  padding-left: 8px;
-  padding-top: 4px;
-}
-
-.shared-header-navbar--home {
-  text-decoration: none;
-  filter: saturate(15%);
-}
-
-.shared-header-navbar--favorites {
-  text-decoration: none;
-  filter: saturate(15%);
-} */
-
-
 .main--image-list {
-  /* border: 1px dashed; */
   column-count: 5;
   column-gap: 7px;
   margin: 0px 150px;
-  min-height: 100vh;
-    /* to get rid of unwanted white space at the bottom */
+  /* code below is not needed after adding background-color to body and set to !important */
+  /* min-height: 100vh; */
+  /* to get rid of unwanted white space at the bottom */
 }
 
 .image {
@@ -109,9 +91,20 @@ img {
   filter: saturate(10%);
 }
 
+.favorites {
+  column-count: 4;
+  column-gap: 7px;
+  margin: 0px 150px;
+}
+
+
 @media(max-width: 1150px) {
   .main--image-list {
     column-count: 4;
+  }
+
+  .favorites {
+    column-count: 3;
   }
 }
 
@@ -120,11 +113,19 @@ img {
     column-count: 3;
     margin: 0px 100px;
   }
+
+  .favorites {
+    column-count: 2;
+  }
 }
 
 @media(max-width: 768px) {
   .main--image-list {
     column-count: 2;
+  }
+
+  .favorites {
+    column-count: 1;
   }
 }
 
