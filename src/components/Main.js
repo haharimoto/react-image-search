@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Image from './Image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 
@@ -9,6 +9,27 @@ function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
 
+  useEffect(() => {
+    const inputData = localStorage.getItem('input')
+    if (inputData) {
+      setInput(JSON.parse(inputData))
+    }
+
+    const allImagesData = localStorage.getItem('allImages')
+    if (allImagesData) {
+      setAllImages(JSON.parse(allImagesData))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('input', JSON.stringify(input))
+  }, [input])
+
+  useEffect(() => {
+    localStorage.setItem('allImages', JSON.stringify(allImages))
+  }, [allImages])
+
+  //functions
   function handleChange(event) {
     setInput(event.target.value)
   }
@@ -25,7 +46,7 @@ function Main() {
   // }
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=10  &query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=50&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
     } catch(error) {
@@ -37,6 +58,7 @@ function Main() {
     event.preventDefault();
     fetchImages()
   }
+
 
   return (
     <main>
@@ -68,11 +90,3 @@ function Main() {
 }
 
 export default Main
-
-
-  // const favorites = useFavorite(state => state.favorites)
-  // useEffect(() => {
-  //   // localStorage.setItem("favorites", JSON.stringify(favorites))
-  //   // console.log(favorites)
-  //   console.log('0');
-  // }, [favorites])
