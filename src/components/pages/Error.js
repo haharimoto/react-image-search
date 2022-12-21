@@ -6,7 +6,12 @@ function Error() {
   return (
     <div>
       <Navbar />
-      <b>404</b>
+      <div className='error-message'>
+        <h2>
+          <div className='error-message--404'><b>404</b></div>
+          Page not found
+        </h2>
+      </div>
     </div>
   )
 }

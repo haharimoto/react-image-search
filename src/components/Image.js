@@ -32,6 +32,7 @@ function Image(props) {
 export default Image
 
 
+//* without Zustand, local state
 // const isLiked = favorites.find(el => el.id === props.el.id) ? true : false
 // function handleLike() {
 //   if(isLiked) {

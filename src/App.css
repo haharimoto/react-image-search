@@ -97,6 +97,21 @@ img {
   margin: 0px 150px;
 }
 
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.error-message > h2 {
+  color: #0d1117;
+  opacity: 70%;
+}
+
+.error-message--404 {
+  text-align: center;
+}
 
 @media(max-width: 1150px) {
   .main--image-list {
