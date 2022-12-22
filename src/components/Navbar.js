@@ -13,9 +13,19 @@ function Navbar() {
     style = { height: '126.26px' }
   }
 
+  // clear 'allImages' from LocalStorage
+  function emptySearchResult() {
+    localStorage.removeItem('input')
+    localStorage.removeItem('allImages')
+    // reload only on home page
+    if (location.pathname === '/') {
+      window.location.reload()
+    }
+  }
+
   return (
     <div className='nav' style={style}>
-      <Link className='nav--home' to='/'>🏚</Link>
+      <Link onClick={emptySearchResult} className='nav--home' to='/'>🏚</Link>
       <Link className='nav--favorites' to='/favorites'>❤</Link>
     </div>
 

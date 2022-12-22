@@ -5,11 +5,11 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(177, 177, 177) !important;
+  background-color: #b1b1b1 !important;
 }
 
 main {
-  background-color: rgb(177, 177, 177);
+  background-color: #b1b1b1;
 }
 
 img {
@@ -69,7 +69,7 @@ img {
   top: 4px;
   left: 0px;
   background-color: transparent;
-  opacity: 30%;
+  opacity: 20%;
   border-radius: 5px;
   border: none;
   filter: saturate(15%);
