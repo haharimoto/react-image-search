@@ -1,16 +1,31 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import create from 'zustand'
+import { persist } from 'zustand/middleware'
+
+// Zustand
+let store = (set) => ({
+  darkMode: 'light',
+  toggle: () => set(state => ({
+    darkMode: state.darkMode === 'light' ? 'dark' : 'light'
+  }))
+})
+store = persist(store, { name: 'darkMode' })
+export const useDarkMode = create(store)
 
 
 function Navbar() {
+  const darkMode = useDarkMode(state => state.darkMode)
+  const toggle = useDarkMode(state => state.toggle)
+
   // conditional render style based on different routes
   const location = useLocation()
-  let style
+  let navStyle
   if (location.pathname === '/') {
-    style = { height: 'auto' }
+    navStyle = { height: 'auto' }
   } else {
-    style = { height: '126.26px' }
+    navStyle = { height: '126.26px' }
   }
 
   // clear 'allImages' from LocalStorage
@@ -24,9 +39,16 @@ function Navbar() {
   }
 
   return (
-    <div className='nav' style={style}>
-      <Link onClick={emptySearchResult} className='nav--home' to='/'>🏚</Link>
-      <Link className='nav--favorites' to='/favorites'>❤</Link>
+    <div className='nav' style={navStyle}>
+      <div className='nav--links'>
+        <Link onClick={emptySearchResult} className='nav--home' to='/'>🏚</Link>
+        <Link className='nav--favorites' to='/favorites'>❤</Link>
+      </div>
+      <div className='nav--toggle'>
+        <button onClick={toggle}>
+          {darkMode === 'light' ? 'dark' : 'light'}
+        </button>
+      </div>
     </div>
 
   )

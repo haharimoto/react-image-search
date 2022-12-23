@@ -9,6 +9,7 @@ function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
 
+  // get
   useEffect(() => {
     const inputData = localStorage.getItem('input')
     if (inputData) {
@@ -21,6 +22,7 @@ function Main() {
     }
   }, [])
 
+  // set
   useEffect(() => {
     localStorage.setItem('input', JSON.stringify(input))
   }, [input])
@@ -29,7 +31,7 @@ function Main() {
     localStorage.setItem('allImages', JSON.stringify(allImages))
   }, [allImages])
 
-  //functions
+  // functions
   function handleChange(event) {
     setInput(event.target.value)
   }

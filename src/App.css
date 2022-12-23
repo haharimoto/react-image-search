@@ -22,8 +22,10 @@ img {
 }
 
 .nav {
+  /* display: flex by default */
+  justify-content: space-between;
   background-color: #0d1117;
-  padding-left: 8px !important;
+  padding: 0px 8px !important;
   padding-top: 6px;
 }
 
@@ -36,6 +38,10 @@ img {
   text-decoration: none;
   filter: saturate(15%);
 }
+
+/* .nav--toggle {
+  background-color: gray;
+} */
 
 .header--form {
   display: flex;

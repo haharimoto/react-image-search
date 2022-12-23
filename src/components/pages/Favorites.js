@@ -4,16 +4,15 @@ import Image from '../Image'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 
-
 // Zustand
 let store = (set) => ({
   favorites: [],
   filter: (condition) => set(state => ({favorites: state.favorites.filter(condition)})),
   add: (imageObj) => set(state => ({favorites: [...state.favorites, imageObj]})),
 })
-
 store = persist(store, { name: 'favorites' })
 export const useFavorite = create(store)
+
 
 function Favorites() {
   const favorites = useFavorite(state => state.favorites)
