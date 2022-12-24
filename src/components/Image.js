@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useFavorite } from './pages/Favorites'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -40,12 +40,21 @@ function Image(props) {
     }
   }, [props.urls.small])
 
+  // img src
+  const location = useLocation()
+  let src
+  if (location.pathname === '/') {
+    src = props.urls.small
+  } else {
+    src = props.urls.regular
+  }
+
   return (
     <div>
       <div className='image'>
         {isLoading?
           <Skeleton height={height} /> :
-          <img src={props.urls.small} alt="" loading='lazy' />
+          <img src={src} alt="" loading='lazy'/>
         }
         <button className={isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
           ❤

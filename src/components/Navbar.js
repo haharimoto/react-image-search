@@ -45,9 +45,11 @@ function Navbar() {
         <Link className='nav--favorites' to='/favorites'>❤</Link>
       </div>
       <div className='nav--toggle'>
-        <button onClick={toggle}>
-          {darkMode === 'light' ? 'dark' : 'light'}
-        </button>
+        <label className='switch'>
+          <input type="checkbox" checked={darkMode === 'dark'} onChange={toggle} />
+          <span className="slider round"></span>
+          {darkMode === 'light' ? 'light' : 'dark'}
+        </label>
       </div>
     </div>
 
@@ -55,3 +57,8 @@ function Navbar() {
 }
 
 export default Navbar
+
+
+// {/* <button onClick={toggle}>
+// {darkMode === 'light' ? 'dark' : 'light'}
+// </button> */}

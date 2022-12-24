@@ -2,12 +2,15 @@ import React from 'react'
 import Header from './Header'
 import Image from './Image'
 import { useState, useEffect } from 'react'
+import { useDarkMode } from './Navbar'
 // import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
+  const darkMode = useDarkMode(state => state.darkMode)
+
 
   // get
   useEffect(() => {
@@ -62,7 +65,7 @@ function Main() {
   }
 
   return (
-    <main>
+    <main className={darkMode === 'light' ? '' : 'dark'}>
       <Header
         input={input}
         handleChange={handleChange}

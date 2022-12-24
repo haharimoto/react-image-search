@@ -4,19 +4,25 @@ import Favorites from './components/pages/Favorites';
 import Error from './components/pages/Error';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { SkeletonTheme } from 'react-loading-skeleton';
+// import { useDarkMode } from './components/Navbar';
 
 
 function App() {
+  // const darkMode = useDarkMode(state => state.darkMode)
+
   return (
-    <SkeletonTheme baseColor="#808080" highlightColor="#b1b1b1">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='favorites' element={<Favorites />} />
-          <Route path='*' element={<Error />} />
-        </Routes>
-      </BrowserRouter>
-    </SkeletonTheme>
+    // <div className={darkMode}>
+      <SkeletonTheme baseColor="#808080" highlightColor="#b1b1b1">
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='favorites' element={<Favorites />} />
+            <Route path='*' element={<Error />} />
+          </Routes>
+        </BrowserRouter>
+      </SkeletonTheme>
+    // </div>
+
   );
 }
 
