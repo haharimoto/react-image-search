@@ -8,12 +8,13 @@ body {
   background-color: #b1b1b1 !important;
 }
 
-main {
-  background-color: #b1b1b1;
+.wrapper {
+  transition: 0.5s;
 }
 
-main.dark {
+.wrapper-dark {
   background-color: #282D35;
+  transition: 0.5s;
 }
 
 img {
@@ -62,13 +63,12 @@ img {
   width: 300px;
 }
 
-/*! has unknown background color to it  */
+/** has unknown background color on the page when min-height is not set to 100vh  */
 .main--image-list {
   column-count: 5;
   column-gap: 7px;
   margin: 0px 150px;
-  /* code below is not needed after adding background-color to body and set to !important */
-  /* min-height: 100vh; */
+  min-height: 100vh;
   /* to get rid of unwanted white space at the bottom */
 }
 
@@ -104,10 +104,15 @@ img {
   filter: saturate(10%);
 }
 
-.favorites {
+.favorites-image-list {
   column-count: 4;
   column-gap: 7px;
   margin: 0px 150px;
+  min-height: 100vh;
+}
+
+.error {
+  min-height: 100vh;
 }
 
 .error-message {

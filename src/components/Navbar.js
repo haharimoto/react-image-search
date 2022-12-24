@@ -19,7 +19,6 @@ function Navbar() {
   const darkMode = useDarkMode(state => state.darkMode)
   const toggle = useDarkMode(state => state.toggle)
 
-  // conditional render style based on different routes
   const location = useLocation()
   let navStyle
   if (location.pathname === '/') {
@@ -57,8 +56,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-
-// {/* <button onClick={toggle}>
-// {darkMode === 'light' ? 'dark' : 'light'}
-// </button> */}

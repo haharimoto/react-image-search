@@ -4,7 +4,7 @@ import Navbar from '../Navbar'
 
 function Error() {
   return (
-    <div>
+    <div className='error'>
       <Navbar />
       <div className='error-message'>
         <h2>

@@ -3,6 +3,8 @@ import Navbar from '../Navbar'
 import Image from '../Image'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
+// import { useDarkMode } from '../Navbar'
+
 
 // Zustand
 let store = (set) => ({
@@ -15,12 +17,12 @@ export const useFavorite = create(store)
 
 
 function Favorites() {
+  // const darkMode = useDarkMode(state => state.darkMode)
   const favorites = useFavorite(state => state.favorites)
   return (
     <div>
       <Navbar />
-
-      <div className='favorites mt-5 pb-5'>
+      <div className='favorites-image-list mt-5 pb-5'>
         {favorites.map(el => (
           <Image
             key={el.id}
