@@ -3,7 +3,6 @@ import Navbar from '../Navbar'
 import Image from '../Image'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
-// import { useDarkMode } from '../Navbar'
 
 
 // Zustand
@@ -17,7 +16,6 @@ export const useFavorite = create(store)
 
 
 function Favorites() {
-  // const darkMode = useDarkMode(state => state.darkMode)
   const favorites = useFavorite(state => state.favorites)
   return (
     <div>

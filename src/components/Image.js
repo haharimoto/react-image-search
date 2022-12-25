@@ -38,7 +38,7 @@ function Image(props) {
       image.onload = null
       image.onerror = null
     }
-  }, [props.urls.small])
+  }, [props.urls.small, props.urls.regular])
 
   // img src
   const location = useLocation()
