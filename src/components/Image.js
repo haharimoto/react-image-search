@@ -51,12 +51,12 @@ function Image(props) {
 
   return (
     <div>
-      <div className='image'>
+      <div className='image-container'>
         {isLoading?
           <Skeleton height={height} /> :
           <img src={src} alt="" loading='lazy'/>
         }
-        <button className={isLiked ? 'image--liked' : 'image--like'} onClick={handleLike}>
+        <button className={isLiked ? 'image-container--liked' : 'image-container--like'} onClick={handleLike}>
           ❤
         </button>
       </div>

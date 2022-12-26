@@ -14,6 +14,7 @@ body {
 
 .wrapper-dark {
   background-color: #282D35;
+  color: white;
   transition: 0.5s;
 }
 
@@ -63,6 +64,11 @@ img {
   width: 300px;
 }
 
+.main--results {
+  margin: 3px 0px 0px 5px;
+  font-size: 14px;
+}
+
 /** has unknown background color on the page when min-height is not set to 100vh  */
 .main--image-list {
   column-count: 5;
@@ -72,12 +78,12 @@ img {
   /* to get rid of unwanted white space at the bottom */
 }
 
-.image {
+.image-container {
   position: relative;
   margin-bottom: 7px;
 }
 
-.image--like {
+.image-container--like {
   position: absolute;
   top: 4px;
   left: 0px;
@@ -89,12 +95,12 @@ img {
   transition: 0.5s;
 }
 
-.image--like:hover {
+.image-container--like:hover {
   opacity: 100%;
   transition: 0.5s;
 }
 
-.image--liked {
+.image-container--liked {
   position: absolute;
   top: 4px;
   left: 0px;

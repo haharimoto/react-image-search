@@ -103,7 +103,7 @@ function Main() {
         loader={<h4>Loading...</h4>}
       > */}
 
-      {isVisible && <p>Total Results: {results}</p>}
+      {isVisible && <p className='main--results'>Total Results: {results}</p>}
       <div className='main--image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
