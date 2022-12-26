@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom'
 import { useFavorite } from './pages/Favorites'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as faSolid } from '@fortawesome/fontawesome-free-solid'
+import { faHeart as faRegular } from '@fortawesome/fontawesome-free-regular'
 
 
 function Image(props) {
@@ -52,13 +55,15 @@ function Image(props) {
   return (
     <div>
       <div className='image-container'>
-        {isLoading?
-          <Skeleton height={height} /> :
-          <img src={src} alt="" loading='lazy'/>
+        {isLoading
+          ? <Skeleton height={height} />
+          : <img src={src} alt="" loading='lazy'/>
         }
-        <button className={isLiked ? 'image-container--liked' : 'image-container--like'} onClick={handleLike}>
-          ❤
-        </button>
+
+        {isLiked
+          ? <button className='image-container--liked' onClick={handleLike}><FontAwesomeIcon icon={faSolid} /></button>
+          : <button className='image-container--like' onClick={handleLike}><FontAwesomeIcon icon={faRegular} /></button>
+        }
       </div>
     </div>
   )
@@ -82,15 +87,3 @@ export default Image
 //     ])
 //   }
 // }
-
-//* harder way to setup skeleton
-// implement skeleton loader for each image
-// height = height of div.image
-// no need to worry about width bc of masonry grid
-
-// const [divHeight, setDivHeight] = useState(0)
-// const ref = useRef(null)
-
-// useEffect(() => {
-//   setDivHeight(ref.current.offsetHeight)
-// }, [])

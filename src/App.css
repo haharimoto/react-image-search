@@ -67,6 +67,7 @@ img {
 .main--results {
   margin: 3px 0px 0px 5px;
   font-size: 14px;
+  opacity: 90%;
 }
 
 /** has unknown background color on the page when min-height is not set to 100vh  */
@@ -83,31 +84,35 @@ img {
   margin-bottom: 7px;
 }
 
-.image-container--like {
-  position: absolute;
-  top: 4px;
-  left: 0px;
-  background-color: transparent;
-  opacity: 20%;
-  border-radius: 5px;
-  border: none;
-  filter: saturate(15%);
-  transition: 0.5s;
+.image-container:hover .image-container--like {
+  display: block;
+  /* * transition: 1s, not working when hovered on image-container*/
 }
 
-.image-container--like:hover {
-  opacity: 100%;
-  transition: 0.5s;
+.image-container--like {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: rgb(115, 115, 115);
+  background-color: transparent;
+  border-radius: 5px;
+  border: none;
+  display: none;
+  transition: 0.1s;
+  font-size: 1.25em;
 }
 
 .image-container--liked {
   position: absolute;
-  top: 4px;
+  top: 0px;
   left: 0px;
+  color: rgba(115, 115, 115, 0.7);
+  /* background-color: rgba(26, 26, 26, 0.5); */
   background-color: transparent;
   border-radius: 5px;
   border: none;
-  filter: saturate(10%);
+  transition: 0.1s;
+  font-size: 1.35em;
 }
 
 .favorites-image-list {
@@ -137,34 +142,40 @@ img {
   text-align: center;
 }
 
-@media(max-width: 1150px) {
+@media(max-width: 1250px) {
   .main--image-list {
     column-count: 4;
   }
 
-  .favorites {
+  .favorites-image-list {
     column-count: 3;
+    margin: 0px 125px;
   }
 }
 
-@media(max-width: 992px) {
+@media(max-width: 1050px) {
   .main--image-list {
     column-count: 3;
-    margin: 0px 100px;
+    margin: 0px 125px;
   }
 
-  .favorites {
+  .favorites-image-list {
     column-count: 2;
+    margin: 0px 100px;
+
   }
 }
 
 @media(max-width: 768px) {
   .main--image-list {
     column-count: 2;
+    margin: 0px 100px;
   }
 
-  .favorites {
+  .favorites-image-list {
     column-count: 1;
+    margin: 0px 50px;
+
   }
 }
 
