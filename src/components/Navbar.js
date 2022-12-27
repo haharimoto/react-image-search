@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/fontawesome-free-solid'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
 // Zustand
 let store = (set) => ({
@@ -40,8 +43,12 @@ function Navbar() {
   return (
     <div className='nav' style={navStyle}>
       <div className='nav--links'>
-        <Link onClick={emptySearchResult} className='nav--home' to='/'>🏚</Link>
-        <Link className='nav--favorites' to='/favorites'>❤</Link>
+        <Link onClick={emptySearchResult} className='nav--home' to='/'>
+          <FontAwesomeIcon className='' icon={faHouse} />
+        </Link>
+        <Link className='nav--favorites' to='/favorites'>
+          <FontAwesomeIcon icon={faHeart} />
+        </Link>
       </div>
       <div className='nav--toggle'>
         <label className='switch'>
