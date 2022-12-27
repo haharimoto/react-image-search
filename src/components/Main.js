@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from './Header'
 import Image from './Image'
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
+// import InfiniteScroll from 'react-infinite-scroll-component'
 
 
 function Main() {
@@ -9,6 +10,8 @@ function Main() {
   const [allImages, setAllImages] = useState([])
   const [totalResults, setTotalResults] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [page, setPage] = useState(1)
+  console.log(page);
 
   // get
   useEffect(() => {
@@ -20,6 +23,7 @@ function Main() {
       setAllImages(JSON.parse(localStorage.getItem('allImages')))
       setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
       setIsVisible(JSON.parse(localStorage.getItem('isVisible')))
+      setPage(JSON.parse(localStorage.getItem('page')))
     }
   }, [])
 
@@ -41,6 +45,9 @@ function Main() {
     localStorage.setItem('isVisible', JSON.stringify(isVisible))
   }, [isVisible])
 
+  useEffect(() => {
+    localStorage.setItem('page', JSON.stringify(page))
+  }, [page])
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -58,7 +65,7 @@ function Main() {
   // }
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&per_page=50&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json();
       setAllImages(data.results)
       setTotalResults(data.total)
@@ -76,11 +83,21 @@ function Main() {
   // total results
   let results
   if (totalResults >= 10000) {
-    results = totalResults + '+'
+    results = 'Total Results:' + totalResults + '+'
   } else if (totalResults > 0) {
-    results = totalResults
+    results = 'Total Results:' + totalResults
   } else {
     results = 'Nothing Found'
+  }
+
+  // pagination
+  function handlePrev() {
+    setPage(prevState => prevState - 1)
+    fetchImages()
+  }
+  function handleNext() {
+    setPage(prevState => prevState + 1)
+    fetchImages()
   }
 
   return (
@@ -91,19 +108,7 @@ function Main() {
         handleSubmit={handleSubmit}
       />
 
-      {/* {isVisibleRef.current &&
-      <div className="main--random-image-list">
-        <b>random images</b>
-      </div>} */}
-
-      {/* <InfiniteScroll
-        dataLength={allImages.length} //This is important field to render the next data
-        next={fetchImages}
-        hasMore={true}
-        loader={<h4>Loading...</h4>}
-      > */}
-
-      {isVisible && <p className='main--results'>Total Results: {results}</p>}
+      {isVisible && <p className='main--results'>{results}</p>}
       <div className='main--image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
@@ -114,9 +119,33 @@ function Main() {
           />
         ))}
       </div>
-      {/* </InfiniteScroll> */}
+      <div className='pagination'>
+        <button disabled={page === 1} onClick={handlePrev}>
+          Prev
+        </button>
+        <p>{page}</p>
+        <button onClick={handleNext}>
+          Next
+        </button>
+      </div>
     </main>
   )
 }
 
 export default Main
+
+
+
+
+      // {/* {isVisibleRef.current &&
+      // <div className="main--random-image-list">
+      //   <b>random images</b>
+      // </div>} */}
+
+      // {/* <InfiniteScroll
+      //   dataLength={allImages.length} //This is important field to render the next data
+      //   next={fetchImages}
+      //   hasMore={true}
+      //   loader={<h4>Loading...</h4>}
+      // > */}
+      // {/* </InfiniteScroll> */}

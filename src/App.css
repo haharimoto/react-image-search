@@ -38,7 +38,7 @@ img {
 .nav--home {
   text-decoration: none;
   filter: saturate(15%);
-  padding-right: 5px;
+  padding-right: 4px;
 }
 
 .nav--favorites {
