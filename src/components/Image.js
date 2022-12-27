@@ -15,6 +15,7 @@ function Image(props) {
   const favorites = useFavorite(state => state.favorites)
   const filter = useFavorite(state => state.filter)
   const add = useFavorite(state => state.add)
+  // const imageContainerRef = useRef(null)
 
   // if image(el) exist in favorites array, remove el from favorites array
   // if not, append to favorites array
@@ -22,10 +23,21 @@ function Image(props) {
   function handleLike() {
     if(isLiked) {
       filter(el => el.id !== props.el.id)
+      //* why does this filter elements?
+      // imageContainerRef.current.classList.add('delete-animation')
     } else {
       add(props.el)
     }
   }
+
+  // // *wtf is this
+  // useEffect(() => {
+  //   function handleAnimationEnd () {
+  //     imageContainerRef.current.classList.remove('delete-animation')
+  //     imageContainerRef.current.removeEventListener('animationend', handleAnimationEnd)
+  //   }
+  //   imageContainerRef.current.addEventListener('animationend', handleAnimationEnd)
+  // }, [])
 
   // Skeleton Loader
   function randomHeight(min, max) {
@@ -56,10 +68,8 @@ function Image(props) {
   // like or delete button
   let icon
   if (location.pathname === '/') {
-    // use like button
     icon = faSolid
   } else {
-    // use delete button
     icon = faCircleXmark
   }
 

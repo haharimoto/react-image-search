@@ -44,7 +44,7 @@ function Navbar() {
     <div className='nav' style={navStyle}>
       <div className='nav--links'>
         <Link onClick={emptySearchResult} className='nav--home' to='/'>
-          <FontAwesomeIcon className='' icon={faHouse} />
+          <FontAwesomeIcon icon={faHouse} />
         </Link>
         <Link className='nav--favorites' to='/favorites'>
           <FontAwesomeIcon icon={faHeart} />

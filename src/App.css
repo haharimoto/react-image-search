@@ -14,7 +14,7 @@ body {
 
 .wrapper-dark {
   background-color: #282D35;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.5);
   transition: 0.5s;
 }
 
@@ -57,17 +57,17 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 28px;
+  padding-bottom: 32px;
 }
 
 .header--form--input {
   text-indent: 4px;
   border-radius: 4px;
-  width: 300px;
+  width: 440px;
 }
 
 .main--results {
-  margin: 3px 0px 0px 7px;
+  margin: 3px 0px 0px 6px;
   font-size: 14px;
   opacity: 90%;
 }
@@ -91,12 +91,17 @@ img {
   /* * transition: 1s, not working when hovered on image-container*/
 }
 
+/* .image-container.delete-animation {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.2s ease-in-out, transform 0,2s ease-in-out;
+} */
+
 .image-container--like {
   position: absolute;
   top: 0px;
   left: 0px;
   color: rgb(115, 115, 115);
-  /* background-color: transparent; */
   background-color: rgba(111,111,111,0.2);
   border-radius: 5px;
   border: none;
@@ -114,7 +119,7 @@ img {
   border-radius: 5px;
   border: none;
   transition: 0.2s;
-  font-size: 1.35em;
+  font-size: 1.25em;
 }
 
 .favorites-image-list {
