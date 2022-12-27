@@ -7,6 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faSolid } from '@fortawesome/fontawesome-free-solid'
 import { faHeart as faRegular } from '@fortawesome/fontawesome-free-regular'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 
 function Image(props) {
@@ -52,6 +53,16 @@ function Image(props) {
     src = props.urls.regular
   }
 
+  // like or delete button
+  let icon
+  if (location.pathname === '/') {
+    // use like button
+    icon = faSolid
+  } else {
+    // use delete button
+    icon = faCircleXmark
+  }
+
   return (
     <div>
       <div className='image-container'>
@@ -61,7 +72,7 @@ function Image(props) {
         }
 
         {isLiked
-          ? <button className='image-container--liked' onClick={handleLike}><FontAwesomeIcon icon={faSolid} /></button>
+          ? <button className='image-container--liked' onClick={handleLike}><FontAwesomeIcon icon={icon} /></button>
           : <button className='image-container--like' onClick={handleLike}><FontAwesomeIcon icon={faRegular} /></button>
         }
       </div>
@@ -70,7 +81,6 @@ function Image(props) {
 }
 
 export default Image
-
 
 
 
