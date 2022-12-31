@@ -43,7 +43,7 @@ img {
 
 .nav--favorites {
   text-decoration: none;
-  filter: saturate(15%);
+  color: rgba(115, 115, 115, 0.99);;
 }
 
 /* .nav--toggle {
@@ -66,11 +66,11 @@ img {
   width: 440px;
 }
 
-.main--results {
+/* .main--results {
   margin: 3px 0px 0px 6px;
   font-size: 14px;
   opacity: 90%;
-}
+} */
 
 /** has unknown background color on the page when min-height is not set to 100vh  */
 .main--image-list {
@@ -79,6 +79,21 @@ img {
   margin: 0px 150px;
   min-height: 100vh;
   /* to get rid of unwanted white space at the bottom */
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 48px;
+}
+
+.pagination > button {
+  border-radius: 2px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.7);
+  width: 100px
+
 }
 
 .image-container {
