@@ -26,7 +26,6 @@ function Main() {
       setPage(JSON.parse(localStorage.getItem('page')))
       paginationRef.current = true
     }
-
   }, [])
 
   // set

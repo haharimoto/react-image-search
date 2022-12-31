@@ -36,6 +36,11 @@ function Favorites() {
 export default Favorites
 
 
+
+
+
+
+
   //* Zustand EXAMPLE:
   // bears: 0,
   // increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
