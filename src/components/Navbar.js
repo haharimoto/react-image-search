@@ -27,7 +27,7 @@ function Navbar() {
   if (location.pathname === '/') {
     navStyle = { height: 'auto' }
   } else {
-    navStyle = { height: '147.43px' }
+    navStyle = { height: '149.43px' }
   }
 
   // clear 'allImages' from LocalStorage
