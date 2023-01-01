@@ -27,7 +27,7 @@ function Navbar() {
   if (location.pathname === '/') {
     navStyle = { height: 'auto' }
   } else {
-    navStyle = { height: '126.26px' }
+    navStyle = { height: '147.43px' }
   }
 
   // clear 'allImages' from LocalStorage
@@ -40,6 +40,21 @@ function Navbar() {
     }
   }
 
+  // dark mode
+  let lightStyle
+  if (darkMode === 'light') {
+    lightStyle = { 'fontWeight': 'bold', 'transition': '0.4s' }
+  } else {
+    lightStyle = { 'fontWeight': 'normal', 'opacity': '20%', 'transition': '0.4s' }
+  }
+
+  let darkStyle
+  if (darkMode === 'dark') {
+    darkStyle = { 'fontWeight': 'bold', 'transition': '0.4s' }
+  } else {
+    darkStyle = { 'fontWeight': 'normal', 'opacity': '20%', 'transition': '0.4s' }
+  }
+
   return (
     <div className='nav' style={navStyle}>
       <div className='nav--links'>
@@ -50,12 +65,14 @@ function Navbar() {
           <FontAwesomeIcon icon={faHeart} />
         </Link>
       </div>
+
       <div className='nav--toggle'>
-        <label className='switch'>
+        <p style={lightStyle}>Light</p>
+        <label className='nav--toggle--switch'>
           <input type="checkbox" checked={darkMode === 'dark'} onChange={toggle} />
-          <span className="slider round"></span>
-          {darkMode === 'light' ? 'light' : 'dark'}
+          <span className="nav--toggle--slider round"></span>
         </label>
+        <p style={darkStyle}>Dark</p>
       </div>
     </div>
 
@@ -63,3 +80,6 @@ function Navbar() {
 }
 
 export default Navbar
+
+
+// {darkMode === 'light' ? 'light' : 'dark'}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useFavorite } from './pages/Favorites'
 import Skeleton from 'react-loading-skeleton'
@@ -15,7 +15,7 @@ function Image(props) {
   const favorites = useFavorite(state => state.favorites)
   const filter = useFavorite(state => state.filter)
   const add = useFavorite(state => state.add)
-  const imageContainerRef = useRef(null)
+  // const imageContainerRef = useRef(null)
 
   // if image(el) exist in favorites array, remove el from favorites array
   // if not, append to favorites array
@@ -24,20 +24,20 @@ function Image(props) {
     if(isLiked) {
       filter(el => el.id !== props.el.id)
       //* why does this filter elements?
-      imageContainerRef.current.classList.add('delete-animation')
+      // imageContainerRef.current.classList.add('delete-animation')
     } else {
       add(props.el)
     }
   }
 
-  // delete animation
-  useEffect(() => {
-    function handleAnimationEnd () {
-      imageContainerRef.current.classList.remove('delete-animation')
-      imageContainerRef.current.removeEventListener('animationend', handleAnimationEnd)
-    }
-    imageContainerRef.current.addEventListener('animationend', handleAnimationEnd)
-  }, [])
+  // // delete animation
+  // useEffect(() => {
+  //   function handleAnimationEnd () {
+  //     imageContainerRef.current.classList.remove('delete-animation')
+  //     imageContainerRef.current.removeEventListener('animationend', handleAnimationEnd)
+  //   }
+  //   imageContainerRef.current.addEventListener('animationend', handleAnimationEnd)
+  // }, [])
 
   // Skeleton Loader
   function randomHeight(min, max) {
@@ -75,7 +75,7 @@ function Image(props) {
 
   return (
     <div>
-      <div className='image-container' ref={imageContainerRef}>
+      <div className='image-container'>
         {isLoading
           ? <Skeleton height={height} />
           : <img src={src} alt="" loading='lazy'/>
@@ -109,4 +109,4 @@ export default Image
 // }
 
 
-// {/* <div className={isDeleting ? 'image-container-deleting' : 'image-container'}> */}
+// ref={imageContainerRef}

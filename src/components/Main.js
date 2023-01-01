@@ -95,7 +95,6 @@ function Main() {
   useEffect(() => {
     if (paginationRef.current) {
       fetchImages()
-      // console.log('useEffect fetch');
     }
     localStorage.setItem('page', JSON.stringify(page))
   }, [page])
@@ -130,11 +129,11 @@ function Main() {
         ))}
       </div>
 
-      {isVisible && <div className='pagination'>
+      {isVisible && <div className='main--pagination'>
         <button disabled={page === 1} onClick={handlePrev}>
           Prev
         </button>
-        <h5 className='m-1 px-1'>{page}</h5>
+        <h5 className='main--pagination--h5'>{page}</h5>
         <button onClick={handleNext}>
           Next
         </button>

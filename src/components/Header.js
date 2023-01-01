@@ -16,8 +16,8 @@ function Header(props) {
   return (
     <div className='header'>
       <Navbar />
-      <h4 className='text-center text-light'>Find Images</h4>
-      <div className='header--form pt-1'>
+      <h2 className='text-center text-light'>Find Images</h2>
+      <div className='header--form'>
         <form onSubmit={props.handleSubmit}>
           <input
             className='header--form--input'
