@@ -12,6 +12,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 function Image(props) {
   const [isLoading, setIsLoading] = useState(true)
+  const [modal, setModal] = useState(false)
   const favorites = useFavorite(state => state.favorites)
   const filter = useFavorite(state => state.filter)
   const add = useFavorite(state => state.add)
@@ -56,13 +57,18 @@ function Image(props) {
     }
   }, [props.urls.small, props.urls.regular])
 
-  // img src
+  // img src based on routes
   const location = useLocation()
   let src
   if (location.pathname === '/') {
     src = props.urls.small
   } else {
     src = props.urls.regular
+  }
+
+  // modal
+  function handleModal() {
+    setModal(prevState => !prevState)
   }
 
   // like or delete button
@@ -75,10 +81,19 @@ function Image(props) {
 
   return (
     <div>
+      {modal &&
+        <div className="modal" onClick={handleModal}>
+          <div className="modal-overlay"></div>
+          <div className="modal-content">
+            <img src={props.urls.full} alt="" />
+          </div>
+        </div>
+      }
+
       <div className='image-container'>
         {isLoading
           ? <Skeleton height={height} />
-          : <img src={src} alt="" loading='lazy'/>
+          : <img src={src} onClick={handleModal} alt="" loading='lazy'/>
         }
 
         {isLiked
