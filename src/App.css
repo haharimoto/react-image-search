@@ -43,7 +43,14 @@ img {
 
 .nav--favorites {
   text-decoration: none;
-  color: rgba(115, 115, 115, 0.99);;
+  /* color: rgba(115, 115, 115, 0.99); */
+  color: #e04c4c;
+  font-size: 1.05em;
+}
+
+.nav--links > a:hover {
+  filter: saturate(20%);
+
 }
 
 /* dark mode toggle----------------------------------------- */
@@ -192,7 +199,7 @@ input:checked + .nav--toggle--slider:before {
   margin-bottom: 7px;
 }
 
-.image-container:hover .image-container--like {
+.image-container:hover > button {
   display: block;
   /* * transition: 1s, not working when hovered on image-container*/
 }
@@ -233,28 +240,30 @@ input:checked + .nav--toggle--slider:before {
 } */
 
 .image-container--like {
+  display: none;
   position: absolute;
   top: 0px;
   left: 0px;
-  color: rgb(115, 115, 115);
-  background-color: rgba(111,111,111,0.2);
-  border-radius: 4px;
+  color: #e04c4c;
+  background-color: rgba(111,111,111,0.5);
+  border-radius: 2px;
   border: none;
-  display: none;
   /* transition: 0.2s; */
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 .image-container--liked {
+  display: none;
   position: absolute;
   top: 0px;
   left: 0px;
-  color: rgba(115, 115, 115, 0.99);
+  /* color: rgba(115, 115, 115, 0.99); */
+  color: #e04c4c;
   background-color: rgba(111,111,111,0.2);
-  border-radius: 4px;
+  border-radius: 2px;
   border: none;
   /* transition: 0.2s; */
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 .favorites-image-list {

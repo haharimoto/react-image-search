@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faSolid } from '@fortawesome/fontawesome-free-solid'
 import { faHeart as faRegular } from '@fortawesome/fontawesome-free-regular'
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 
 function Image(props) {
@@ -76,7 +76,7 @@ function Image(props) {
   if (location.pathname === '/') {
     icon = faSolid
   } else {
-    icon = faCircleXmark
+    icon = faXmark
   }
 
   return (
