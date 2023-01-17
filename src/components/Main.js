@@ -2,6 +2,8 @@ import React from 'react'
 import Header from './Header'
 import Image from './Image'
 import { useState, useEffect, useRef } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
 
@@ -11,6 +13,9 @@ function Main() {
   // const [totalResults, setTotalResults] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
   console.log(isVisible);
+  const [error, setError] = useState('null')
+  const [showError, setShowError] = useState(false)
+  const [fadeOut, setFadeOut] = useState(false)
   const [page, setPage] = useState(1)
   const paginationRef = useRef(false)
 
@@ -71,7 +76,7 @@ function Main() {
         setIsVisible(true)
       }
     } catch(error) {
-      alert("Sum ting wong");
+      setError(error)
     }
   }
 
@@ -81,6 +86,19 @@ function Main() {
     setPage(1)
     paginationRef.current = true
   }
+
+  // error
+  useEffect(() => {
+    if (error) {
+      setShowError(true)
+      setTimeout(() => {
+        setFadeOut(true)
+        setTimeout(() => {
+          setShowError(false)
+        }, 1000)
+      }, 3000)
+    }
+  }, [error])
 
   // total results
   // let results
@@ -117,6 +135,14 @@ function Main() {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
+
+      {showError && <div className={`network-error ${fadeOut ? 'fade-out' : ''}`}>
+        <i><FontAwesomeIcon icon={faTriangleExclamation} /></i>
+        <div className='network-error--message'>
+          <h5>Network Error</h5>
+          <p>Please check your Internet connection and try again</p>
+        </div>
+      </div>}
 
       {/* <p className='main--results'>{results}</p> */}
       <div className='main--image-list mt-5 pb-5'>

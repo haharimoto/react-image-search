@@ -164,6 +164,12 @@ input:checked + .nav--toggle--slider:before {
   align-items: center;
   background-color: rgba(128, 128, 128, 0.4);
   padding: 5px 0px;
+  transition: opacity 1s ease-in;
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
 }
 
 .network-error > i {
