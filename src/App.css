@@ -50,7 +50,6 @@ img {
 
 .nav--links > a:hover {
   filter: saturate(20%);
-
 }
 
 /* dark mode toggle----------------------------------------- */
@@ -158,6 +157,22 @@ input:checked + .nav--toggle--slider:before {
   text-indent: 4px;
   border-radius: 4px;
   width: 440px;
+}
+
+.network-error {
+  display: flex;
+  align-items: center;
+  background-color: rgba(128, 128, 128, 0.4);
+  padding: 5px 0px;
+}
+
+.network-error > i {
+  font-size: 1.5em;
+  padding: 0px 10px;
+}
+
+.network-error--message * {
+  margin: 0;
 }
 
 /* .main--results {
@@ -287,6 +302,10 @@ input:checked + .nav--toggle--slider:before {
 .error-message > h2 {
   color: #0d1117;
   opacity: 70%;
+}
+
+.error-message > h2 > i {
+  font-size: 7em;
 }
 
 .error-message--404 {

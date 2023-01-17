@@ -10,6 +10,7 @@ function Main() {
   const [allImages, setAllImages] = useState([])
   // const [totalResults, setTotalResults] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
+  console.log(isVisible);
   const [page, setPage] = useState(1)
   const paginationRef = useRef(false)
 

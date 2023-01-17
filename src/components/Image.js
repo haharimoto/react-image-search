@@ -45,6 +45,7 @@ function Image(props) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
   const height = randomHeight(120, 300)
+  //! useMemo
 
   useEffect(() => {
     const image = new window.Image()

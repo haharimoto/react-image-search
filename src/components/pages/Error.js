@@ -1,5 +1,7 @@
 import React from 'react'
 import Navbar from '../Navbar'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrown } from '@fortawesome/free-solid-svg-icons'
 
 
 function Error() {
@@ -8,6 +10,8 @@ function Error() {
       <Navbar />
       <div className='error-message'>
         <h2>
+          <i><FontAwesomeIcon icon={faFaceFrown} /></i>
+          <br />
           <div className='error-message--404'><b>404</b></div>
           Page not found
         </h2>
