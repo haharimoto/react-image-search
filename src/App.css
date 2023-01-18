@@ -351,13 +351,35 @@ input:checked + .nav--toggle--slider:before {
   .favorites-image-list {
     column-count: 1;
     margin: 0px 50px;
-
   }
 }
 
 @media(max-width: 600px) {
+  .nav--home {
+    font-size: 1.5em;
+  }
+
+  .nav--favorites {
+    font-size: 1.55em;
+  }
+
   .main--image-list {
     column-count: 1;
     margin: 0px 50px;
+  }
+
+  .header--form--input {
+    width: 300px;
+  }
+
+  .header--heading {
+    width: 100%;
+    margin-top: 11.44px;
+    margin-bottom: 3.23px;
+    font-size: 2em;
+  }
+
+  .image-container > button {
+    display: block;
   }
 }
