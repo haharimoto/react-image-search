@@ -12,7 +12,6 @@ function Main() {
   const [allImages, setAllImages] = useState([])
   // const [totalResults, setTotalResults] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
-  console.log(isVisible);
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
@@ -70,7 +69,7 @@ function Main() {
   async function fetchImages() {
     try {
       const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-      const data = await res.json();
+      const data = await res.json()
       if (data.total !== 0) {
         setAllImages(data.results)
         // setTotalResults(data.total)

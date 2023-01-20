@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useFavorite } from './pages/Favorites'
 import Skeleton from 'react-loading-skeleton'
@@ -41,11 +41,13 @@ function Image(props) {
   // }, [])
 
   // Skeleton Loader
-  function randomHeight(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-  const height = randomHeight(120, 300)
-  //! useMemo
+  const converter = (240 / props.width)
+  const height = props.height * converter
+
+  // function randomHeight(min, max) {
+  //   return Math.floor(Math.random() * (max - min + 1) + min)
+  // }
+  // const height = randomHeight(120, 300)
 
   useEffect(() => {
     const image = new window.Image()
@@ -91,10 +93,10 @@ function Image(props) {
         </div>
       }
 
-      <div className='image-container'>
+      <div className='image-container' style={{height: height}}>
         {isLoading
           ? <Skeleton height={height} />
-          : <img src={src} onClick={handleModal} alt="" loading='lazy'/>
+          : <img src={src} onClick={handleModal} alt="" loading='lazy' style={{height: height}}/>
         }
 
         {isLiked

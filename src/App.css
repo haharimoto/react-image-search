@@ -187,9 +187,9 @@ input:checked + .nav--toggle--slider:before {
   opacity: 90%;
 } */
 
-/** has unknown background color on the page when min-height is not set to 100vh  */
+/*! has unknown background color on the page when min-height is not set to 100vh  */
 .main--image-list {
-  column-count: 5;
+  column-width: 240px;
   column-gap: 7px;
   margin: 0px 150px;
   min-height: 100vh;
@@ -288,7 +288,7 @@ input:checked + .nav--toggle--slider:before {
 }
 
 .favorites-image-list {
-  column-count: 4;
+  column-width: 360px;
   column-gap: 7px;
   margin: 0px 150px;
   min-height: 100vh;
@@ -318,41 +318,6 @@ input:checked + .nav--toggle--slider:before {
   text-align: center;
 }
 
-@media(max-width: 1250px) {
-  .main--image-list {
-    column-count: 4;
-  }
-
-  .favorites-image-list {
-    column-count: 3;
-    margin: 0px 125px;
-  }
-}
-
-@media(max-width: 1050px) {
-  .main--image-list {
-    column-count: 3;
-    margin: 0px 125px;
-  }
-
-  .favorites-image-list {
-    column-count: 2;
-    margin: 0px 100px;
-
-  }
-}
-
-@media(max-width: 768px) {
-  .main--image-list {
-    column-count: 2;
-    margin: 0px 100px;
-  }
-
-  .favorites-image-list {
-    column-count: 1;
-    margin: 0px 50px;
-  }
-}
 
 @media(max-width: 600px) {
   .nav--home {
@@ -364,8 +329,7 @@ input:checked + .nav--toggle--slider:before {
   }
 
   .main--image-list {
-    column-count: 1;
-    margin: 0px 50px;
+    margin: 0px 25px;
   }
 
   .header--form--input {
@@ -381,5 +345,9 @@ input:checked + .nav--toggle--slider:before {
 
   .image-container > button {
     display: block;
+  }
+
+  .favorites-image-list {
+    margin: 0px 25px;
   }
 }
