@@ -11,7 +11,6 @@ function Main() {
   const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
   // const [totalResults, setTotalResults] = useState(null)
-  const [isVisible, setIsVisible] = useState(false)
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
@@ -27,7 +26,6 @@ function Main() {
     if (localStorage.getItem('allImages')) {
       setAllImages(JSON.parse(localStorage.getItem('allImages')))
       // setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
-      setIsVisible(JSON.parse(localStorage.getItem('isVisible')))
       setPage(JSON.parse(localStorage.getItem('page')))
       paginationRef.current = true
     }
@@ -47,20 +45,13 @@ function Main() {
   //   localStorage.setItem('totalResults', JSON.stringify(totalResults))
   // }, [totalResults])
 
-  useEffect(() => {
-    localStorage.setItem('isVisible', JSON.stringify(isVisible))
-  }, [isVisible])
 
   function handleChange(event) {
     setInput(event.target.value)
   }
 
-  // display nothing by default
-  // display image-list when user press search button
-
   // function handleSubmit(event) {
   //   event.preventDefault()
-  //   // interpolate input state and .env variable to API
   //   fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
   //     .then(res => res.json())
   //     .then(data => setAllImages(data.results))
@@ -73,7 +64,6 @@ function Main() {
       if (data.total !== 0) {
         setAllImages(data.results)
         // setTotalResults(data.total)
-        setIsVisible(true)
       }
     } catch(error) {
       setError(error)
@@ -96,7 +86,7 @@ function Main() {
         setTimeout(() => {
           setShowError(false)
         }, 1000)
-      }, 3000)
+      }, 5000)
     }
   }, [error])
 
@@ -156,7 +146,7 @@ function Main() {
         ))}
       </div>
 
-      {isVisible && <div className='main--pagination'>
+      {(allImages.length !== 0) && <div className='main--pagination'>
         <button disabled={page === 1} onClick={handlePrev}>
           Prev
         </button>

@@ -1,18 +1,8 @@
 import React from 'react'
 import Navbar from './Navbar'
-// import { useLocation } from 'react-router-dom'
-
 
 
 function Header(props) {
-  // const location = useLocation()
-  // let style
-  // if (location.pathname === '/') {
-  //   style = { height: 'auto' }
-  // } else {
-  //   style = { height: '126.26px' }
-  // }
-
   return (
     <div className='header'>
       <Navbar />

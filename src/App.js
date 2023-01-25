@@ -28,7 +28,6 @@ function App() {
         </BrowserRouter>
       </SkeletonTheme>
     </div>
-
   );
 }
 
