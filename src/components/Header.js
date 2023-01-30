@@ -1,8 +1,11 @@
 import React from 'react'
 import Navbar from './Navbar'
+import { useMain } from './Main'
 
 
 function Header(props) {
+  const input = useMain(state => state.input)
+
   return (
     <div className='header'>
       <Navbar />
@@ -16,7 +19,7 @@ function Header(props) {
             placeholder='Search'
             onChange={props.handleChange}
             name='input'
-            value={props.input}
+            value={input}
           />
         </form>
       </div>

@@ -4,11 +4,21 @@ import Image from './Image'
 import { useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+import create from 'zustand'
+import { persist } from 'zustand/middleware'
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
 
+// Zustand
+let store = (set) => ({
+  input: '',
+  setInput: (value) => set({ input: value }),
+})
+store = persist(store, { name: 'input' })
+export const useMain = create(store)
+
+
 function Main() {
-  const [input, setInput] = useState('')
   const [allImages, setAllImages] = useState([])
   const [totalResults, setTotalResults] = useState(null)
   const [error, setError] = useState(null)
@@ -17,12 +27,11 @@ function Main() {
   const [page, setPage] = useState(1)
   const paginationRef = useRef(false)
 
+  const input = useMain(state => state.input)
+  const setInput = useMain(state => state.setInput)
+
   // get
   useEffect(() => {
-    if (localStorage.getItem('input')) {
-      setInput(JSON.parse(localStorage.getItem('input')))
-    }
-
     if (localStorage.getItem('allImages')) {
       setAllImages(JSON.parse(localStorage.getItem('allImages')))
       // setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
@@ -34,10 +43,6 @@ function Main() {
   // set
   //* dryer?
   useEffect(() => {
-    localStorage.setItem('input', JSON.stringify(input))
-  }, [input])
-
-  useEffect(() => {
     localStorage.setItem('allImages', JSON.stringify(allImages))
   }, [allImages])
 
@@ -48,6 +53,7 @@ function Main() {
 
   function handleChange(event) {
     setInput(event.target.value)
+
   }
 
   // function handleSubmit(event) {
@@ -121,7 +127,7 @@ function Main() {
   return (
     <main>
       <Header
-        input={input}
+        // input={input}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
