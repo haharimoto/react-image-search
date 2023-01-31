@@ -1,11 +1,12 @@
 import React from 'react'
 import Header from './Header'
-import Image from './Image'
+// import Image from './Image'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useNavigate } from 'react-router-dom';
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
 
@@ -29,6 +30,7 @@ function Main() {
   const [page, setPage] = useState(1)
   // const paginationRef = useRef(false)
 
+  let navigate = useNavigate()
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
   const allImages = useMain(state => state.allImages)
@@ -60,7 +62,6 @@ function Main() {
 
   function handleChange(event) {
     setInput(event.target.value)
-
   }
 
   // function handleSubmit(event) {
@@ -88,6 +89,7 @@ function Main() {
     fetchImages()
     setPage(1)
     // paginationRef.current = true
+    navigate(`/query?input=${input}`)
   }
 
   // error
@@ -135,7 +137,6 @@ function Main() {
   return (
     <main>
       <Header
-        // input={input}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
@@ -149,7 +150,8 @@ function Main() {
       </div>}
 
       {/* <p className='main--results'>{totalResults}</p> */}
-      <div className='main--image-list mt-5 pb-5'>
+
+      {/* <div className='main--image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
             key={el.id}
@@ -158,7 +160,7 @@ function Main() {
             el={el}
           />
         ))}
-      </div>
+      </div> */}
 
       {allImages.length !== 0 && <div className='main--pagination'>
         <button disabled={page === 1} onClick={handlePrev}>

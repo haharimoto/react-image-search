@@ -189,7 +189,7 @@ input:checked + .nav--toggle--slider:before {
 } */
 
 /*! has unknown background color on the page when min-height is not set to 100vh  */
-.main--image-list {
+.image-list {
   column-width: 240px;
   column-gap: 7px;
   margin: 0px 150px;
@@ -334,7 +334,7 @@ input:checked + .nav--toggle--slider:before {
     font-size: 1.55em;
   }
 
-  .main--image-list {
+  .image-list {
     margin: 0px 35px;
   }
 
