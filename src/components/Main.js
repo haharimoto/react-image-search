@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Image from './Image'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import create from 'zustand'
@@ -13,38 +13,45 @@ import { persist } from 'zustand/middleware'
 let store = (set) => ({
   input: '',
   setInput: (value) => set({ input: value }),
+  allImages: [],
+  setAllImages: (images) => set({ allImages: images}),
+  totalResults: null,
+  setTotalResults: (num) => set({ totalResults: num}),
 })
 store = persist(store, { name: 'input' })
 export const useMain = create(store)
 
 
 function Main() {
-  const [allImages, setAllImages] = useState([])
-  const [totalResults, setTotalResults] = useState(null)
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
   const [page, setPage] = useState(1)
-  const paginationRef = useRef(false)
+  // const paginationRef = useRef(false)
 
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
+  const allImages = useMain(state => state.allImages)
+  const setAllImages = useMain(state => state.setAllImages)
+  const totalResults = useMain(state => state.totalResults)
+  const setTotalResults = useMain(state => state.setTotalResults)
+
 
   // get
-  useEffect(() => {
-    if (localStorage.getItem('allImages')) {
-      setAllImages(JSON.parse(localStorage.getItem('allImages')))
-      // setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
-      setPage(JSON.parse(localStorage.getItem('page')))
-      paginationRef.current = true
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (localStorage.getItem('allImages')) {
+  //     setAllImages(JSON.parse(localStorage.getItem('allImages')))
+  //     // setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
+  //     setPage(JSON.parse(localStorage.getItem('page')))
+  //     paginationRef.current = true
+  //   }
+  // }, [])
 
   // set
   //* dryer?
-  useEffect(() => {
-    localStorage.setItem('allImages', JSON.stringify(allImages))
-  }, [allImages])
+  // useEffect(() => {
+  //   localStorage.setItem('allImages', JSON.stringify(allImages))
+  // }, [allImages])
 
   // useEffect(() => {
   //   localStorage.setItem('totalResults', JSON.stringify(totalResults))
@@ -80,7 +87,7 @@ function Main() {
     event.preventDefault();
     fetchImages()
     setPage(1)
-    paginationRef.current = true
+    // paginationRef.current = true
   }
 
   // error
@@ -107,13 +114,14 @@ function Main() {
   // }
 
   // pagination
-  useEffect(() => {
-    if (paginationRef.current) {
-      fetchImages()
-    }
-    localStorage.setItem('page', JSON.stringify(page))
-  }, [page])
+  // useEffect(() => {
+  //   if (paginationRef.current) {
+  //     fetchImages()
+  //   }
+  //   localStorage.setItem('page', JSON.stringify(page))
+  // }, [page])
 
+  //* pages
   function handlePrev() {
     setPage(prevState => prevState - 1)
     fetchImages()
