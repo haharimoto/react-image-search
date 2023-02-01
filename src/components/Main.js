@@ -89,7 +89,7 @@ function Main() {
     fetchImages()
     setPage(1)
     // paginationRef.current = true
-    navigate(`/query?input=${input}`)
+    navigate(`/search?query=${input}`)
   }
 
   // error
