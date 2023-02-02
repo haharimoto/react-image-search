@@ -76,7 +76,7 @@ function Image(props) {
 
   // like or delete button
   let icon
-  if (location.pathname === '/') {
+  if (location.pathname !== 'favorites') {
     icon = faSolid
   } else {
     icon = faXmark

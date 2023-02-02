@@ -1,4 +1,6 @@
 import React from 'react'
+import Navbar from '../Navbar'
+// import Header from '../Header'
 import Image from '../Image'
 // import { useParams } from 'react-router-dom';
 // import { useSearchParams } from "react-router-dom";
@@ -13,6 +15,8 @@ function Query() {
 
   return (
     <div>
+      <Navbar />
+      {/* <Header /> */}
       <div className='image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
