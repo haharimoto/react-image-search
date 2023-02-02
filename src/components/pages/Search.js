@@ -7,7 +7,7 @@ import Image from '../Image'
 import { useMain } from '../Main.js'
 
 
-function Query() {
+function Search() {
   // const [searchParams, setSearchParams] = useSearchParams({})
   // console.log(searchParams)
   const allImages = useMain(state => state.allImages)
@@ -32,4 +32,4 @@ function Query() {
   )
 }
 
-export default Query
+export default Search

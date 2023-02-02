@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './Header'
-// import Image from './Image'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import create from 'zustand'
-import { persist } from 'zustand/middleware'
+// import { persist } from 'zustand/middleware'
 import { useNavigate } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom'
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
 
@@ -19,7 +19,7 @@ let store = (set) => ({
   totalResults: null,
   setTotalResults: (num) => set({ totalResults: num}),
 })
-store = persist(store, { name: 'input' })
+// store = persist(store, { name: 'input' })
 export const useMain = create(store)
 
 
@@ -31,45 +31,26 @@ function Main() {
   // const paginationRef = useRef(false)
 
   let navigate = useNavigate()
+  // let location = useLocation()
+  // let query = new URLSearchParams(location.search).get("query") || ''
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
   const allImages = useMain(state => state.allImages)
+  console.log(allImages.length);
   const setAllImages = useMain(state => state.setAllImages)
   const totalResults = useMain(state => state.totalResults)
   const setTotalResults = useMain(state => state.setTotalResults)
 
-
-  // get
   // useEffect(() => {
-  //   if (localStorage.getItem('allImages')) {
-  //     setAllImages(JSON.parse(localStorage.getItem('allImages')))
-  //     // setTotalResults(JSON.parse(localStorage.getItem('totalResults')))
-  //     setPage(JSON.parse(localStorage.getItem('page')))
-  //     paginationRef.current = true
+  //   if (query) {
+  //     setInput(query)
+  //     fetchImages()
   //   }
-  // }, [])
-
-  // set
-  //* dryer?
-  // useEffect(() => {
-  //   localStorage.setItem('allImages', JSON.stringify(allImages))
-  // }, [allImages])
-
-  // useEffect(() => {
-  //   localStorage.setItem('totalResults', JSON.stringify(totalResults))
-  // }, [totalResults])
-
+  // }, [query])
 
   function handleChange(event) {
     setInput(event.target.value)
   }
-
-  // function handleSubmit(event) {
-  //   event.preventDefault()
-  //   fetch(`https://api.unsplash.com/search/photos?query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-  //     .then(res => res.json())
-  //     .then(data => setAllImages(data.results))
-  // }
 
   async function fetchImages() {
     try {
@@ -149,19 +130,6 @@ function Main() {
         </div>
       </div>}
 
-      {/* <p className='main--results'>{totalResults}</p> */}
-
-      {/* <div className='main--image-list mt-5 pb-5'>
-        {allImages.map(el => (
-          <Image
-            key={el.id}
-            // do need spread operator below for img's src to work in Image.js
-            {...el}
-            el={el}
-          />
-        ))}
-      </div> */}
-
       {allImages.length !== 0 && <div className='main--pagination'>
         <button disabled={page === 1} onClick={handlePrev}>
           Prev
@@ -177,13 +145,6 @@ function Main() {
 
 export default Main
 
-
-
-
-      // {/* {isVisibleRef.current &&
-      // <div className="main--random-image-list">
-      //   <b>random images</b>
-      // </div>} */}
 
       // {/* <InfiniteScroll
       //   dataLength={allImages.length} //This is important field to render the next data
