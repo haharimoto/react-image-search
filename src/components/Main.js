@@ -6,7 +6,6 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import create from 'zustand'
 // import { persist } from 'zustand/middleware'
 import { useNavigate } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom'
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
 
@@ -28,25 +27,14 @@ function Main() {
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
   const [page, setPage] = useState(1)
-  // const paginationRef = useRef(false)
 
   let navigate = useNavigate()
-  // let location = useLocation()
-  // let query = new URLSearchParams(location.search).get("query") || ''
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
-  const allImages = useMain(state => state.allImages)
-  console.log(allImages.length);
+  // const allImages = useMain(state => state.allImages)
   const setAllImages = useMain(state => state.setAllImages)
-  const totalResults = useMain(state => state.totalResults)
+  // const totalResults = useMain(state => state.totalResults)
   const setTotalResults = useMain(state => state.setTotalResults)
-
-  // useEffect(() => {
-  //   if (query) {
-  //     setInput(query)
-  //     fetchImages()
-  //   }
-  // }, [query])
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -69,7 +57,6 @@ function Main() {
     event.preventDefault();
     fetchImages()
     setPage(1)
-    // paginationRef.current = true
     navigate(`/search?query=${input}`)
   }
 
@@ -96,23 +83,16 @@ function Main() {
   //   results = 'Nothing Found'
   // }
 
-  // pagination
-  // useEffect(() => {
-  //   if (paginationRef.current) {
-  //     fetchImages()
-  //   }
-  //   localStorage.setItem('page', JSON.stringify(page))
-  // }, [page])
 
   //* pages
-  function handlePrev() {
-    setPage(prevState => prevState - 1)
-    fetchImages()
-  }
-  function handleNext() {
-    setPage(prevState => prevState + 1)
-    fetchImages()
-  }
+  // function handlePrev() {
+  //   setPage(prevState => prevState - 1)
+  //   fetchImages()
+  // }
+  // function handleNext() {
+  //   setPage(prevState => prevState + 1)
+  //   fetchImages()
+  // }
 
 
   return (
@@ -130,7 +110,7 @@ function Main() {
         </div>
       </div>}
 
-      {allImages.length !== 0 && <div className='main--pagination'>
+      {/* {allImages.length !== 0 && <div className='main--pagination'>
         <button disabled={page === 1} onClick={handlePrev}>
           Prev
         </button>
@@ -138,7 +118,7 @@ function Main() {
         <button disabled={totalResults < 31} onClick={handleNext}>
           Next
         </button>
-      </div>}
+      </div>} */}
     </main>
   )
 }

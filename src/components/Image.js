@@ -76,7 +76,7 @@ function Image(props) {
 
   // like or delete button
   let icon
-  if (location.pathname !== 'favorites') {
+  if (location.pathname === '/' || 'search') {
     icon = faSolid
   } else {
     icon = faXmark
@@ -109,22 +109,3 @@ function Image(props) {
 }
 
 export default Image
-
-
-
-
-//* without Zustand, local state
-// const isLiked = favorites.find(el => el.id === props.el.id) ? true : false
-// function handleLike() {
-//   if(isLiked) {
-//     setFavorites(favorites.filter(el => el.id !== props.el.id))
-//   } else {
-//     setFavorites([
-//       ...favorites,
-//       props.el
-//     ])
-//   }
-// }
-
-
-// ref={imageContainerRef}
