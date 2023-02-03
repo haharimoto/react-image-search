@@ -24,7 +24,7 @@ function Navbar() {
 
   const location = useLocation()
   let navStyle
-  if (location.pathname === '/') {
+  if (location.pathname === '/' || 'search') {
     navStyle = { height: 'auto' }
   } else {
     navStyle = { height: '149.43px' }

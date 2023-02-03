@@ -1,6 +1,5 @@
 import React from 'react'
-import Navbar from '../Navbar'
-// import Header from '../Header'
+import Header from '../Header'
 import Image from '../Image'
 // import { useParams } from 'react-router-dom';
 import { useSearchParams } from "react-router-dom";
@@ -11,12 +10,12 @@ function Search() {
   const [searchParams, setSearchParams] = useSearchParams({})
   console.log(searchParams)
   const allImages = useMain(state => state.allImages)
+  console.log(allImages);
 
 
   return (
     <div>
-      <Navbar />
-      {/* <Header /> */}
+      <Header />
       <div className='image-list mt-5 pb-5'>
         {allImages.map(el => (
           <Image
@@ -27,7 +26,7 @@ function Search() {
           />
         ))}
       </div>
-      <button onClick={() => {setSearchParams({ query: "world" })}}>Click This</button>
+      <button onClick={() => {setSearchParams({ hello: "world" })}}>Click This</button>
     </div>
   )
 }
