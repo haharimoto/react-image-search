@@ -3,14 +3,14 @@ import Header from '../Header'
 import Image from '../Image'
 // import { useParams } from 'react-router-dom';
 import { useSearchParams } from "react-router-dom";
-import { useMain } from '../Main.js'
+import { useMain } from '../Header';
 
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams({})
   console.log(searchParams)
   const allImages = useMain(state => state.allImages)
-  console.log(allImages);
+  console.log(allImages)
 
 
   return (

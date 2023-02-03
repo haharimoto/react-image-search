@@ -1,11 +1,22 @@
 import React from 'react'
 import Navbar from './Navbar'
+import create from 'zustand'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
-import { useMain } from './Main'
-import { useNavigate } from 'react-router-dom'
 
+// Zustand
+let store = (set) => ({
+  input: '',
+  setInput: (value) => set({ input: value }),
+  allImages: [],
+  setAllImages: (images) => set({ allImages: images}),
+  totalResults: null,
+  setTotalResults: (num) => set({ totalResults: num}),
+})
+// store = persist(store, { name: 'input' })
+export const useMain = create(store)
 
 function Header() {
   const [error, setError] = useState(null)
@@ -55,6 +66,16 @@ function Header() {
       }, 5000)
     }
   }, [error])
+
+  // useEffect(() => {
+  //   const query = new URLSearchParams(window.location.search).get('query')
+  //   console.log(query);
+  //   if (query) {
+  //     setInput(query)
+  //     fetchImages()
+  //     navigate(`/search?query=${query}`)
+  //   }
+  // }, [window.location.search])
 
   return (
     <div className='header'>

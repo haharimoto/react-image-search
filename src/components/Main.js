@@ -1,21 +1,7 @@
 import React from 'react'
 import Header from './Header'
-import create from 'zustand'
-// import { persist } from 'zustand/middleware'
 // import InfiniteScroll from 'react-infinite-scroll-component'
 
-
-// Zustand
-let store = (set) => ({
-  input: '',
-  setInput: (value) => set({ input: value }),
-  allImages: [],
-  setAllImages: (images) => set({ allImages: images}),
-  totalResults: null,
-  setTotalResults: (num) => set({ totalResults: num}),
-})
-// store = persist(store, { name: 'input' })
-export const useMain = create(store)
 
 function Main() {
   // total results
