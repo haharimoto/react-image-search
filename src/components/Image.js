@@ -74,6 +74,14 @@ function Image(props) {
     setModal(prevState => !prevState)
   }
 
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [modal])
+
   // like or delete button
   let icon
   if (location.pathname === '/' || 'search') {
