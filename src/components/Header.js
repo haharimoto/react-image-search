@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import create from 'zustand'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import { useSearchParams, createSearchParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
@@ -15,7 +16,6 @@ let store = (set) => ({
   totalResults: null,
   setTotalResults: (num) => set({ totalResults: num}),
 })
-// store = persist(store, { name: 'input' })
 export const useMain = create(store)
 
 function Header() {
@@ -24,6 +24,8 @@ function Header() {
   const [fadeOut, setFadeOut] = useState(false)
   const [page, setPage] = useState(1)
   let navigate = useNavigate()
+  // const [searchParams, setSearchParams] = useSearchParams()
+  // const query = searchParams.get('query') || ''
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
   const setAllImages = useMain(state => state.setAllImages)
@@ -32,6 +34,7 @@ function Header() {
 
   function handleChange(event) {
     setInput(event.target.value)
+    // setSearchParams(createSearchParams({query: event.target.value}))
   }
 
   async function fetchImages() {
@@ -67,15 +70,6 @@ function Header() {
     }
   }, [error])
 
-  // useEffect(() => {
-  //   const query = new URLSearchParams(window.location.search).get('query')
-  //   console.log(query);
-  //   if (query) {
-  //     setInput(query)
-  //     fetchImages()
-  //     navigate(`/search?query=${query}`)
-  //   }
-  // }, [window.location.search])
 
   return (
     <div className='header'>
@@ -107,3 +101,13 @@ function Header() {
 }
 
 export default Header
+
+// useEffect(() => {
+//   const query = new URLSearchParams(window.location.search).get('query')
+//   console.log(query);
+//   if (query) {
+//     setInput(query)
+//     fetchImages()
+//     navigate(`/search?query=${query}`)
+//   }
+// }, [window.location.search])
