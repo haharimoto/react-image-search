@@ -2,15 +2,14 @@ import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-// import { useSearchParams, createSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
 // Zustand
 let store = (set) => ({
-  input: '',
-  setInput: (value) => set({ input: value }),
+  // input: '',
+  // setInput: (value) => set({ input: value }),
   allImages: [],
   setAllImages: (images) => set({ allImages: images}),
   totalResults: null,
@@ -22,24 +21,22 @@ function Header() {
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
-  const [page, setPage] = useState(1)
-  let navigate = useNavigate()
-  // const [searchParams, setSearchParams] = useSearchParams()
-  // const query = searchParams.get('query') || ''
-  const input = useMain(state => state.input)
-  const setInput = useMain(state => state.setInput)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = searchParams.get('query') || ''
+  const page = searchParams.get('page') || 1
+  const allImages = useMain(state => state.allImages)
   const setAllImages = useMain(state => state.setAllImages)
   // const totalResults = useMain(state => state.totalResults)
   const setTotalResults = useMain(state => state.setTotalResults)
 
   function handleChange(event) {
-    setInput(event.target.value)
-    // setSearchParams(createSearchParams({query: event.target.value}))
+    // setInput(event.target.value)
+    setSearchParams({query: event.target.value})
   }
 
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${query}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json()
       if (data.total !== 0) {
         setAllImages(data.results)
@@ -50,12 +47,21 @@ function Header() {
     }
   }
 
+  let navigate = useNavigate()
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     fetchImages()
-    setPage(1)
-    navigate(`/search?query=${input}`)
+    setSearchParams({page: page})
+    navigate(`/search?query=${query}&page=${page}`)
   }
+
+  const location = useLocation()
+  useEffect(() => {
+    if (location.pathname === '/search' && allImages.length === 0) {
+      fetchImages()
+      navigate(`/search?query=${query}&page=${page}`)
+    }
+  }, [query])
 
   // error
   useEffect(() => {
@@ -84,7 +90,7 @@ function Header() {
             placeholder='Search'
             onChange={handleChange}
             name='input'
-            value={input}
+            value={query}
           />
         </form>
       </div>
@@ -101,13 +107,3 @@ function Header() {
 }
 
 export default Header
-
-// useEffect(() => {
-//   const query = new URLSearchParams(window.location.search).get('query')
-//   console.log(query);
-//   if (query) {
-//     setInput(query)
-//     fetchImages()
-//     navigate(`/search?query=${query}`)
-//   }
-// }, [window.location.search])

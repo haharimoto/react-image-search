@@ -2,15 +2,16 @@ import React from 'react'
 import Header from '../Header'
 import Image from '../Image'
 // import { useParams } from 'react-router-dom';
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { useMain } from '../Header';
 
 
 function Search() {
-  const [searchParams, setSearchParams] = useSearchParams({})
-  console.log(searchParams)
+  // const [searchParams, setSearchParams] = useSearchParams({})
+  // console.log(searchParams)
   const allImages = useMain(state => state.allImages)
   console.log(allImages)
+  console.log('Search.js rendered')
 
 
   return (
@@ -26,7 +27,7 @@ function Search() {
           />
         ))}
       </div>
-      <button onClick={() => {setSearchParams({ hello: "world" })}}>Click This</button>
+      {/* <button onClick={() => {setSearchParams({ hello: "world" })}}>Click This</button> */}
     </div>
   )
 }

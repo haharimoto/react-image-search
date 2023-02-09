@@ -32,8 +32,6 @@ function Navbar() {
 
   // clear 'allImages' from LocalStorage
   function emptySearchResult() {
-    localStorage.removeItem('input')
-    localStorage.removeItem('allImages')
     // reload only on home page
     if (location.pathname === '/') {
       window.location.reload()
