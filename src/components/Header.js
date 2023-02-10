@@ -24,7 +24,7 @@ function Header() {
   const [fadeOut, setFadeOut] = useState(false)
 
   // global state and search params
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = searchParams.get('page') || 1
   const input = useMain(state => state.input)
@@ -55,9 +55,8 @@ function Header() {
   let navigate = useNavigate()
   const handleSubmit = async (event) => {
     event.preventDefault()
+    navigate(`/search?query=${input}&page=1`)
     fetchImages()
-    setSearchParams({page: page})
-    navigate(`/search?query=${input}&page=${page}`)
   }
 
   // this useEffect causes Search.js to render 3 times
@@ -67,8 +66,13 @@ function Header() {
       if (query) {
         setInput(query)
       }
-      fetchImages()
       navigate(`/search?query=${input}&page=${page}`)
+      fetchImages()
+    }
+
+    // need this to deal with page not refreshing when submitting
+    if (location.pathname === '/search' && allImages.length !== 0) {
+      fetchImages()
     }
     //* eslint
     // eslint-disable-next-line

@@ -250,7 +250,7 @@ input:checked + .nav--toggle--slider:before {
 }
 
 .modal-content > img {
-  max-height: 750px;
+  max-height: 700px;
   width: auto;
   height: auto;
   object-fit: contain;
