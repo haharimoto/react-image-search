@@ -8,8 +8,8 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 
 // Zustand
 let store = (set) => ({
-  // input: '',
-  // setInput: (value) => set({ input: value }),
+  input: '',
+  setInput: (value) => set({ input: value }),
   allImages: [],
   setAllImages: (images) => set({ allImages: images}),
   totalResults: null,
@@ -18,25 +18,30 @@ let store = (set) => ({
 export const useMain = create(store)
 
 function Header() {
+  // local state
   const [error, setError] = useState(null)
   const [showError, setShowError] = useState(false)
   const [fadeOut, setFadeOut] = useState(false)
+
+  // global state and search params
   const [searchParams, setSearchParams] = useSearchParams()
-  const query = searchParams.get('query') || ''
+  const query = searchParams.get('query')
   const page = searchParams.get('page') || 1
+  const input = useMain(state => state.input)
+  const setInput = useMain(state => state.setInput)
   const allImages = useMain(state => state.allImages)
   const setAllImages = useMain(state => state.setAllImages)
   // const totalResults = useMain(state => state.totalResults)
   const setTotalResults = useMain(state => state.setTotalResults)
 
   function handleChange(event) {
-    // setInput(event.target.value)
-    setSearchParams({query: event.target.value})
+    setInput(event.target.value)
+    // setSearchParams({query: event.target.value})
   }
 
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${query}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json()
       if (data.total !== 0) {
         setAllImages(data.results)
@@ -52,16 +57,28 @@ function Header() {
     event.preventDefault()
     fetchImages()
     setSearchParams({page: page})
-    navigate(`/search?query=${query}&page=${page}`)
+    navigate(`/search?query=${input}&page=${page}`)
   }
 
+  // this useEffect causes Search.js to render 3 times
   const location = useLocation()
   useEffect(() => {
     if (location.pathname === '/search' && allImages.length === 0) {
+      if (query) {
+        setInput(query)
+      }
       fetchImages()
-      navigate(`/search?query=${query}&page=${page}`)
+      navigate(`/search?query=${input}&page=${page}`)
     }
-  }, [query])
+    //* eslint
+    // eslint-disable-next-line
+  }, [searchParams])
+
+  // useEffect(() => {
+  //   if (location.pathname === '/search?query=dark&page=2') {
+  //     console.log('dark, page2');
+  //   }
+  // }, [page])
 
   // error
   useEffect(() => {
@@ -90,7 +107,7 @@ function Header() {
             placeholder='Search'
             onChange={handleChange}
             name='input'
-            value={query}
+            value={input}
           />
         </form>
       </div>
