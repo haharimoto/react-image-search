@@ -24,7 +24,9 @@ function Navbar() {
 
   const location = useLocation()
   let navStyle
-  if (location.pathname === '/' || 'search') {
+  if (location.pathname === '/') {
+    navStyle = { height: 'auto' }
+  } else if (location.pathname === '/search') {
     navStyle = { height: 'auto' }
   } else {
     navStyle = { height: '149.43px' }
@@ -78,6 +80,3 @@ function Navbar() {
 }
 
 export default Navbar
-
-
-// {darkMode === 'light' ? 'light' : 'dark'}
