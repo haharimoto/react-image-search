@@ -15,7 +15,7 @@ let store = (set) => ({
   totalResults: null,
   setTotalResults: (num) => set({ totalResults: num}),
 })
-export const useMain = create(store)
+export const useHeader = create(store)
 
 function Header() {
   // global state and search params
@@ -23,12 +23,11 @@ function Header() {
   const query = searchParams.get('query')
   const page = searchParams.get('page') || 1
 
-  const input = useMain(state => state.input)
-  const setInput = useMain(state => state.setInput)
-  const allImages = useMain(state => state.allImages)
-  const setAllImages = useMain(state => state.setAllImages)
-  // const totalResults = useMain(state => state.totalResults)
-  const setTotalResults = useMain(state => state.setTotalResults)
+  const input = useHeader(state => state.input)
+  const setInput = useHeader(state => state.setInput)
+  const allImages = useHeader(state => state.allImages)
+  const setAllImages = useHeader(state => state.setAllImages)
+  const setTotalResults = useHeader(state => state.setTotalResults)
 
   const error = useError(state => state.error)
   const setError = useError(state => state.setError)

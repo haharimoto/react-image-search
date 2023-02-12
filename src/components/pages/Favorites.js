@@ -31,7 +31,9 @@ function Favorites() {
       window.removeEventListener('online', () => setShowError(false))
       window.removeEventListener('offline', () => setShowError(true))
     }
-  }, [setShowError])
+    //* eslint
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div>

@@ -14,12 +14,7 @@ let store = (set) => ({
 export const useError = create(store)
 
 function ErrorMsg() {
-  // const error = useMain(state => state.error)
-  // const setError = useMain(state => state.setError)
-  // const showError = useMain(state => state.showError)
-  // const setShowError = useMain(state => state.setShowError)
   const fadeOut = useError(state => state.fadeOut)
-  // const setFadeOut = useMain(state => state.setFadeOut)
 
   return (
     <div>
