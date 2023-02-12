@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
-import { useState, useEffect } from 'react'
+import ErrorMsg, { useError } from './ErrorMsg'
+import { useEffect } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
+
 
 // Zustand
 let store = (set) => ({
@@ -18,21 +18,25 @@ let store = (set) => ({
 export const useMain = create(store)
 
 function Header() {
-  // local state
-  const [error, setError] = useState(null)
-  const [showError, setShowError] = useState(false)
-  const [fadeOut, setFadeOut] = useState(false)
-
   // global state and search params
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = searchParams.get('page') || 1
+
   const input = useMain(state => state.input)
   const setInput = useMain(state => state.setInput)
   const allImages = useMain(state => state.allImages)
   const setAllImages = useMain(state => state.setAllImages)
   // const totalResults = useMain(state => state.totalResults)
   const setTotalResults = useMain(state => state.setTotalResults)
+
+  const error = useError(state => state.error)
+  const setError = useError(state => state.setError)
+  const showError = useError(state => state.showError)
+  const setShowError = useError(state => state.setShowError)
+  // const fadeOut = useError(state => state.fadeOut)
+  const setFadeOut = useError(state => state.setFadeOut)
+
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -94,7 +98,7 @@ function Header() {
         }, 1000)
       }, 5000)
     }
-  }, [error])
+  }, [error, setFadeOut, setShowError])
 
 
   return (
@@ -115,13 +119,7 @@ function Header() {
         </form>
       </div>
 
-      {showError && <div className={`network-error ${fadeOut ? 'fade-out' : ''}`}>
-        <i><FontAwesomeIcon icon={faTriangleExclamation} /></i>
-        <div className='network-error--message'>
-          <h5>Network Error</h5>
-          <p>Please check your Internet connection and try again</p>
-        </div>
-      </div>}
+      {showError && <ErrorMsg />}
     </div>
   )
 }

@@ -2,7 +2,9 @@ import React from 'react'
 import Navbar from '../Navbar'
 import Image from '../Image'
 import create from 'zustand'
+import { useEffect } from 'react'
 import { persist } from 'zustand/middleware'
+import ErrorMsg, { useError } from '../ErrorMsg'
 
 
 // Zustand
@@ -17,9 +19,25 @@ export const useFavorite = create(store)
 
 function Favorites() {
   const favorites = useFavorite(state => state.favorites)
+  const showError = useError(state => state.showError)
+  const setShowError = useError(state => state.setShowError)
+  // const [isOnline, setIsOnline] = useState(window.navigator.onLine)
+
+  useEffect(() => {
+    window.addEventListener('online', () => setShowError(false))
+    window.addEventListener('offline', () => setShowError(true))
+
+    return () => {
+      window.removeEventListener('online', () => setShowError(false))
+      window.removeEventListener('offline', () => setShowError(true))
+    }
+  }, [setShowError])
+
   return (
     <div>
       <Navbar />
+      {showError && <ErrorMsg />}
+
       <div className='favorites-image-list mt-5 pb-5'>
         {favorites.map(el => (
           <Image
@@ -48,12 +66,3 @@ export default Favorites
 
   //* not right
   // setFavorites: (favorites) => set({favorites}),
-
-  //* JSON parse and stringify not working properly
-  // export const useFavorite = create((set) => ({
-  //   // favorites: JSON.parse(localStorage.getItem("favorites")) || [],
-  //   favorites: [],
-  //   filter: (imageObj) => set(state => ({favorites: state.favorites.filter(imageObj)})),
-  //   add: (imageObj) => set(state => ({favorites: [...state.favorites, imageObj]})),
-
-  // }))
