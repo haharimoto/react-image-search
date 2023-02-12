@@ -35,6 +35,7 @@ function Main() {
           Next
         </button>
       </div>} */}
+      <div className="main--empty"></div>
     </main>
   )
 }

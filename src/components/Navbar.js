@@ -29,7 +29,7 @@ function Navbar() {
   } else if (location.pathname === '/search') {
     navStyle = { height: 'auto' }
   } else {
-    navStyle = { height: '149.43px' }
+    navStyle = { height: '149.82px' }
   }
 
   // clear 'allImages' from LocalStorage

@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-body {
+html, body, #root {
+  height: 100%;
   margin: 0;
   padding: 0;
   background-color: #b1b1b1 !important;
@@ -180,6 +181,11 @@ input:checked + .nav--toggle--slider:before {
 
 .network-error--message * {
   margin: 0;
+}
+
+.main--empty {
+  /* 149.82, height of nav + header */
+  height: calc(100vh - 149.82px);
 }
 
 /* .main--results {
