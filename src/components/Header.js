@@ -19,7 +19,7 @@ export const useHeader = create(store)
 
 function Header() {
   // global state and search params
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = Number(searchParams.get('page') || 1)
 
@@ -49,6 +49,9 @@ function Header() {
       if (data.total !== 0) {
         setAllImages(data.results)
         setTotalResults(data.total)
+      } else {
+        setAllImages([])
+        setTotalResults(0)
       }
     } catch(error) {
       setError(error)
@@ -99,21 +102,6 @@ function Header() {
     }
   }, [error, setFadeOut, setShowError])
 
-  //* pages
-  function handlePrev() {
-    setSearchParams(params => {
-      params.set("page", Math.max(1, page - 1))
-      return params
-    })
-  }
-
-  function handleNext() {
-    setSearchParams(params => {
-      params.set("page", page + 1)
-      return params
-    })
-  }
-
 
   return (
     <div className='header'>
@@ -134,24 +122,8 @@ function Header() {
       </div>
 
       {showError && <ErrorMsg />}
-
-      {allImages.length !== 0 && <div className='main--pagination'>
-        <button disabled={page === 1} onClick={handlePrev}>
-          Prev
-        </button>
-        <h5 className='main--pagination--h5'>{page}</h5>
-        <button onClick={handleNext}>
-          Next
-        </button>
-      </div>}
     </div>
   )
 }
 
 export default Header
-
-// for handlePrev button
-// disabled={page === 1}
-
-// for handleNext button
-// disabled={totalResults < 31}
