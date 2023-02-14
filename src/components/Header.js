@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
 import ErrorMsg, { useError } from './ErrorMsg'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 // Zustand
@@ -33,49 +33,28 @@ function Header() {
   const setError = useError(state => state.setError)
   const showError = useError(state => state.showError)
   const setShowError = useError(state => state.setShowError)
-  // const fadeOut = useError(state => state.fadeOut)
   const setFadeOut = useError(state => state.setFadeOut)
 
 
   function handleChange(event) {
     setInput(event.target.value)
-    // setSearchParams({query: event.target.value})
   }
 
-  // async function fetchImages() {
-  //   try {
-  //     const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-  //     const data = await res.json()
-  //     if (data.total !== 0) {
-  //       setAllImages(data.results)
-  //       setTotalResults(data.total)
-  //     } else {
-  //       setAllImages([])
-  //       setTotalResults(0)
-  //     }
-  //   } catch(error) {
-  //     setError(error)
-  //   }
-  // }
-
-  const fetchImages = useMemo(
-    () => async function fetchImages() {
-      try {
-        const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-        const data = await res.json()
-        if (data.total !== 0) {
-          setAllImages(data.results)
-          setTotalResults(data.total)
-        } else {
-          setAllImages([])
-          setTotalResults(0)
-        }
-      } catch(error) {
-        setError(error)
+  async function fetchImages() {
+    try {
+      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const data = await res.json()
+      if (data.total !== 0) {
+        setAllImages(data.results)
+        setTotalResults(data.total)
+      } else {
+        setAllImages([])
+        setTotalResults(0)
       }
-    },
-    [input, page, setAllImages, setTotalResults, setError]
-  )
+    } catch(error) {
+      setError(error)
+    }
+  }
 
   let navigate = useNavigate()
   const handleSubmit = async (event) => {
@@ -83,7 +62,7 @@ function Header() {
     navigate(`/search?query=${input}&page=1`)
   }
 
-  // this useEffect causes Search.js to render 3 times
+  // this useEffect causes Search.js to render too many times
   const location = useLocation()
   useEffect(() => {
     if (location.pathname === '/search' && allImages.length === 0) {
@@ -99,7 +78,7 @@ function Header() {
       fetchImages()
     }
     // eslint-disable-next-line
-  }, [searchParams, fetchImages])
+  }, [searchParams])
 
   // error
   useEffect(() => {
