@@ -44,11 +44,6 @@ function Image(props) {
   const converter = (240 / props.width)
   const height = props.height * converter
 
-  // function randomHeight(min, max) {
-  //   return Math.floor(Math.random() * (max - min + 1) + min)
-  // }
-  // const height = randomHeight(120, 300)
-
   useEffect(() => {
     const image = new window.Image()
     image.src = props.urls.small

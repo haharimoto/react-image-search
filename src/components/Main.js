@@ -13,12 +13,3 @@ function Main() {
 }
 
 export default Main
-
-
-// {/* <InfiniteScroll
-//   dataLength={allImages.length} //This is important field to render the next data
-//   next={fetchImages}
-//   hasMore={true}
-//   loader={<h4>Loading...</h4>}
-// > */}
-// {/* </InfiniteScroll> */}

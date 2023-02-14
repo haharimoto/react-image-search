@@ -188,13 +188,6 @@ input:checked + .nav--toggle--slider:before {
   height: calc(100vh - 149.82px);
 }
 
-/* .main--results {
-  margin: 3px 0px 0px 6px;
-  font-size: 14px;
-  opacity: 90%;
-} */
-
-/*! has unknown background color on the page when min-height is not set to 100vh  */
 .image-list {
   column-width: 240px;
   column-gap: 7px;
@@ -203,18 +196,18 @@ input:checked + .nav--toggle--slider:before {
   /* to get rid of unwanted white space at the bottom */
 }
 
-.main--pagination {
+.pagination {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-bottom: 48px;
 }
 
-.main--pagination--h5 {
+.pagination--h5 {
   margin: 0.5px 7px;
 }
 
-.main--pagination > button {
+.pagination > button {
   border-radius: 2px;
   font-weight: 500;
   color: rgba(0,0,0,0.7);

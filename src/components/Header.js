@@ -5,7 +5,6 @@ import ErrorMsg, { useError } from './ErrorMsg'
 import { useEffect } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
-
 // Zustand
 let store = (set) => ({
   input: '',
@@ -16,6 +15,7 @@ let store = (set) => ({
   setTotalResults: (num) => set({ totalResults: num}),
 })
 export const useHeader = create(store)
+
 
 function Header() {
   // global state and search params
@@ -79,15 +79,8 @@ function Header() {
     if (location.pathname === '/search' && allImages.length !== 0) {
       fetchImages()
     }
-    //* eslint
     // eslint-disable-next-line
   }, [searchParams])
-
-  // useEffect(() => {
-  //   if (location.pathname === '/search?query=dark&page=2') {
-  //     console.log('dark, page2');
-  //   }
-  // }, [page])
 
   // error
   useEffect(() => {

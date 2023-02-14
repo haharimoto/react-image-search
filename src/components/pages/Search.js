@@ -32,7 +32,7 @@ function Search() {
   return (
     <div>
       <Header />
-      {totalResults === 0 && <p>Nothing Found</p>}
+      {/* {totalResults === 0 && <p>Nothing Found</p>} */}
 
       <div className='image-list mt-5 pb-5'>
         {allImages.map(el => (
@@ -45,11 +45,11 @@ function Search() {
         ))}
       </div>
 
-      {allImages.length !== 0 && <div className='main--pagination'>
+      {allImages.length !== 0 && <div className='pagination'>
         <button disabled={page === 1} onClick={handlePrev}>
           Prev
         </button>
-        <h5 className='main--pagination--h5'>{page}</h5>
+        <h5 className='pagination--h5'>{page}</h5>
         <button disabled={totalResults < 31} onClick={handleNext}>
           Next
         </button>
