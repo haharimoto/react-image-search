@@ -57,13 +57,14 @@ function Header() {
   }
 
   let navigate = useNavigate()
+  const location = useLocation()
   const handleSubmit = async (event) => {
     event.preventDefault()
     navigate(`/search?query=${input}&page=1`)
   }
 
   // this useEffect causes Search.js to render too many times
-  const location = useLocation()
+  // especially the second conditional need improvement
   useEffect(() => {
     if (location.pathname === '/search' && allImages.length === 0) {
       if (query) {
@@ -73,7 +74,7 @@ function Header() {
       fetchImages()
     }
 
-    // need this to deal with page not refreshing when submitting
+    // need this to deal with page not refreshing when submitting or changing pages
     if (location.pathname === '/search' && allImages.length !== 0) {
       fetchImages()
     }
