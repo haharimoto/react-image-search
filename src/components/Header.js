@@ -33,11 +33,13 @@ function Header() {
   const setError = useError(state => state.setError)
   const showError = useError(state => state.showError)
   const setShowError = useError(state => state.setShowError)
+  // const fadeOut = useError(state => state.fadeOut)
   const setFadeOut = useError(state => state.setFadeOut)
 
 
   function handleChange(event) {
     setInput(event.target.value)
+    // setSearchParams({query: event.target.value})
   }
 
   // async function fetchImages() {
