@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../Header'
 import Image from '../Image'
-// import { useSearchParams } from "react-router-dom";
 import { useHeader } from '../Header';
 import { useSearchParams } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
 import ErrorMsg, { useError } from './ErrorMsg'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 // Zustand
@@ -40,21 +40,40 @@ function Header() {
     setInput(event.target.value)
   }
 
-  async function fetchImages() {
-    try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-      const data = await res.json()
-      if (data.total !== 0) {
-        setAllImages(data.results)
-        setTotalResults(data.total)
-      } else {
-        setAllImages([])
-        setTotalResults(0)
+  // async function fetchImages() {
+  //   try {
+  //     const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+  //     const data = await res.json()
+  //     if (data.total !== 0) {
+  //       setAllImages(data.results)
+  //       setTotalResults(data.total)
+  //     } else {
+  //       setAllImages([])
+  //       setTotalResults(0)
+  //     }
+  //   } catch(error) {
+  //     setError(error)
+  //   }
+  // }
+
+  const fetchImages = useMemo(
+    () => async function fetchImages() {
+      try {
+        const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+        const data = await res.json()
+        if (data.total !== 0) {
+          setAllImages(data.results)
+          setTotalResults(data.total)
+        } else {
+          setAllImages([])
+          setTotalResults(0)
+        }
+      } catch(error) {
+        setError(error)
       }
-    } catch(error) {
-      setError(error)
-    }
-  }
+    },
+    [input, page, setAllImages, setTotalResults, setError]
+  )
 
   let navigate = useNavigate()
   const handleSubmit = async (event) => {
@@ -78,7 +97,7 @@ function Header() {
       fetchImages()
     }
     // eslint-disable-next-line
-  }, [searchParams])
+  }, [searchParams, fetchImages])
 
   // error
   useEffect(() => {
