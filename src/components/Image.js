@@ -58,7 +58,7 @@ function Image(props) {
   // img src based on routes
   const location = useLocation()
   let src
-  if (location.pathname === '/') {
+  if (location.pathname === '/search') {
     src = props.urls.small
   } else {
     src = props.urls.regular

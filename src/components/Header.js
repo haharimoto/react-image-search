@@ -19,6 +19,8 @@ export const useHeader = create(store)
 
 function Header() {
   // global state and search params
+  let navigate = useNavigate()
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = Number(searchParams.get('page') || 1)
@@ -56,28 +58,26 @@ function Header() {
     }
   }
 
-  let navigate = useNavigate()
-  const location = useLocation()
   const handleSubmit = async (event) => {
     event.preventDefault()
     navigate(`/search?query=${input}&page=1`)
+    fetchImages()
   }
 
   // this useEffect causes Search.js to render too many times
   // especially the second conditional need improvement
   useEffect(() => {
-    if (location.pathname === '/search' && allImages.length === 0) {
-      if (query) {
-        setInput(query)
+      if (location.pathname === '/search' && allImages.length === 0) {
+        if (query) {
+          setInput(query)
+        }
+        navigate(`/search?query=${input}&page=${page}`)
+        fetchImages()
       }
-      navigate(`/search?query=${input}&page=${page}`)
-      fetchImages()
-    }
-
-    // need this to deal with page not refreshing when submitting or changing pages
-    if (location.pathname === '/search' && allImages.length !== 0) {
-      fetchImages()
-    }
+      // need this to deal with page not refreshing when submitting or changing pages
+      if (location.pathname === '/search' && allImages.length !== 0) {
+        fetchImages()
+      }
     // eslint-disable-next-line
   }, [searchParams])
 
