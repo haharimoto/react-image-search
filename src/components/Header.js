@@ -61,7 +61,6 @@ function Header() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     navigate(`/search?query=${input}&page=1`)
-    fetchImages()
   }
 
   // this useEffect causes Search.js to render too many times
