@@ -10,8 +10,8 @@ function Search() {
   const page = Number(searchParams.get('page') || 1)
   const allImages = useHeader(state => state.allImages)
   const totalResults = useHeader(state => state.totalResults)
-  console.log(allImages)
-  console.log('Search.js rendered')
+  // console.log(allImages)
+  // console.log('Search.js rendered')
 
   // pages
   function handlePrev() {
