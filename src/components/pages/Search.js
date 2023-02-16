@@ -28,6 +28,7 @@ function Search() {
     })
   }
 
+
   return (
     <div>
       <Header />
@@ -58,4 +59,3 @@ function Search() {
 }
 
 export default Search
-// export default React.memo(Search)
