@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
 import ErrorMsg, { useError } from './ErrorMsg'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 // Zustand
@@ -18,8 +18,9 @@ export const useHeader = create(store)
 
 
 function Header() {
-  // global state and search params
+  // global state and search params, and some others
   let navigate = useNavigate()
+  const inputRef = useRef(null)
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
@@ -50,8 +51,9 @@ function Header() {
         setAllImages(data.results)
         setTotalResults(data.total)
       } else {
-        setAllImages([])
-        setTotalResults(0)
+        // setAllImages([])
+        // setTotalResults(0)
+        console.log('No Results Found');
       }
     } catch(error) {
       setError(error)
@@ -79,6 +81,16 @@ function Header() {
       }
     // eslint-disable-next-line
   }, [searchParams])
+
+  // useEffect(() => {
+  //   console.log(allImages);
+  //   // eslint-disable-next-line
+  // }, [searchParams])
+
+  // input
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   // error
   useEffect(() => {
@@ -108,6 +120,7 @@ function Header() {
             onChange={handleChange}
             name='input'
             value={input}
+            ref={inputRef}
           />
         </form>
       </div>
