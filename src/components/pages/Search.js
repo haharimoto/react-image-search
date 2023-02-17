@@ -11,7 +11,7 @@ function Search() {
   const allImages = useHeader(state => state.allImages)
   const totalResults = useHeader(state => state.totalResults)
   // console.log(allImages)
-  // console.log('Search.js rendered')
+  console.log('Search.js rendered')
 
   // pages
   function handlePrev() {
@@ -32,7 +32,8 @@ function Search() {
   return (
     <div>
       <Header />
-      {/* {totalResults === 0 && <p>Nothing Found</p>} */}
+
+      {totalResults === 0 && window.alert('Nothing Found')}
 
       <div className='image-list mt-5 pb-5'>
         {allImages.map(el => (

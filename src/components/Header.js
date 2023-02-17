@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import create from 'zustand'
 import ErrorMsg, { useError } from './ErrorMsg'
 import { useEffect, useRef } from 'react'
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 // Zustand
 let store = (set) => ({
@@ -21,14 +21,14 @@ function Header() {
   // global state and search params, and some others
   let navigate = useNavigate()
   const inputRef = useRef(null)
-  const location = useLocation()
+  // const location = useLocation()
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = Number(searchParams.get('page') || 1)
 
   const input = useHeader(state => state.input)
   const setInput = useHeader(state => state.setInput)
-  const allImages = useHeader(state => state.allImages)
+  // const allImages = useHeader(state => state.allImages)
   const setAllImages = useHeader(state => state.setAllImages)
   const setTotalResults = useHeader(state => state.setTotalResults)
 
@@ -43,17 +43,22 @@ function Header() {
     setInput(event.target.value)
   }
 
+  let realShit
+  if (input === '') {
+    realShit = query
+  } else {
+    realShit = input
+  }
+
   async function fetchImages() {
     try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${input}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${realShit}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
       const data = await res.json()
-      if (data.total !== 0) {
+      if (data.total === 0) {
+        setTotalResults(0)
+      } else {
         setAllImages(data.results)
         setTotalResults(data.total)
-      } else {
-        // setAllImages([])
-        // setTotalResults(0)
-        console.log('No Results Found');
       }
     } catch(error) {
       setError(error)
@@ -65,27 +70,10 @@ function Header() {
     navigate(`/search?query=${input}&page=1`)
   }
 
-  // this useEffect causes Search.js to render too many times
-  // especially the second conditional need improvement
   useEffect(() => {
-      if (location.pathname === '/search' && allImages.length === 0) {
-        if (query) {
-          setInput(query)
-        }
-        navigate(`/search?query=${input}&page=${page}`)
-        fetchImages()
-      }
-      // need this to deal with page not refreshing when submitting or changing pages
-      if (location.pathname === '/search' && allImages.length !== 0) {
-        fetchImages()
-      }
+      fetchImages()
     // eslint-disable-next-line
   }, [searchParams])
-
-  // useEffect(() => {
-  //   console.log(allImages);
-  //   // eslint-disable-next-line
-  // }, [searchParams])
 
   // input
   useEffect(() => {
