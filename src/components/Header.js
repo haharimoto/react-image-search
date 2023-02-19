@@ -21,14 +21,12 @@ function Header() {
   // global state and search params, and some others
   let navigate = useNavigate()
   const inputRef = useRef(null)
-  // const location = useLocation()
   const [searchParams] = useSearchParams()
   const query = searchParams.get('query')
   const page = Number(searchParams.get('page') || 1)
 
   const input = useHeader(state => state.input)
   const setInput = useHeader(state => state.setInput)
-  // const allImages = useHeader(state => state.allImages)
   const setAllImages = useHeader(state => state.setAllImages)
   const setTotalResults = useHeader(state => state.setTotalResults)
 
@@ -43,6 +41,11 @@ function Header() {
     setInput(event.target.value)
   }
 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    navigate(`/search?query=${input}&page=1`)
+  }
+
   let realShit
   if (input === '') {
     realShit = query
@@ -50,28 +53,22 @@ function Header() {
     realShit = input
   }
 
-  async function fetchImages() {
-    try {
-      const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${realShit}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
-      const data = await res.json()
-      if (data.total === 0) {
-        setTotalResults(0)
-      } else {
-        setAllImages(data.results)
-        setTotalResults(data.total)
-      }
-    } catch(error) {
-      setError(error)
-    }
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    navigate(`/search?query=${input}&page=1`)
-  }
-
   useEffect(() => {
-      fetchImages()
+    async function fetchImages() {
+      try {
+        const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${realShit}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+        const data = await res.json()
+        if (data.total === 0) {
+          setTotalResults(0)
+        } else {
+          setAllImages(data.results)
+          setTotalResults(data.total)
+        }
+      } catch(error) {
+        setError(error)
+      }
+    }
+    fetchImages()
     // eslint-disable-next-line
   }, [searchParams])
 
