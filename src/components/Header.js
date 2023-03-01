@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 import create from 'zustand'
 import ErrorMsg, { useError } from './ErrorMsg'
+import { useDarkMode } from './Navbar'
 import { useEffect, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
@@ -36,6 +37,7 @@ function Header() {
   const setShowError = useError(state => state.setShowError)
   const setFadeOut = useError(state => state.setFadeOut)
 
+  const darkMode = useDarkMode(state => state.darkMode)
 
   function handleChange(event) {
     setInput(event.target.value)
@@ -98,7 +100,7 @@ function Header() {
       <div className='header--form'>
         <form onSubmit={handleSubmit}>
           <input
-            className='header--form--input'
+            className={`header--form--input ${darkMode === 'dark' && 'dark'}`}
             autoComplete='off'
             type='text'
             placeholder='Search'

@@ -157,8 +157,16 @@ input:checked + .nav--toggle--slider:before {
 
 .header--form--input {
   text-indent: 4px;
+  font-weight: 500;
   border-radius: 4px;
   width: 440px;
+  transition: 0.5s;
+}
+
+.header--form--input.dark {
+  background-color: #282D35;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
 }
 
 .network-error {
