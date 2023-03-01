@@ -48,11 +48,18 @@ function Header() {
     navigate(`/search?query=${input}&page=1`)
   }
 
+  // let realShit
+  // if (input === '') {
+  //   realShit = query
+  // } else {
+  //   realShit = input
+  // }
+
   let realShit
-  if (input === '') {
-    realShit = query
-  } else {
+  if (input !== '') {
     realShit = input
+  } else {
+    realShit = query
   }
 
   useEffect(() => {
