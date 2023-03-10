@@ -56,8 +56,29 @@ function Header() {
   }
 
   useEffect(() => {
+    // async function fetchImages() {
+    //   try {
+    //     const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${realShit}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
+    //     const data = await res.json()
+    //     if (data.total === 0) {
+    //       setTotalResults(0)
+    //     } else {
+    //       setAllImages(data.results)
+    //       setTotalResults(data.total)
+    //     }
+    //   } catch(error) {
+    //     setError(error)
+    //   }
+    // }
+    // improved version below prevents the app to fetch default images when realShit value does not exist
+
     async function fetchImages() {
       try {
+        if (!realShit) {
+          setAllImages([]);
+          setTotalResults(null);
+          return;
+        }
         const res = await fetch(`https://api.unsplash.com/search/photos?&page=${page}&per_page=30&query=${realShit}&client_id=${process.env.REACT_APP_UNSPLASH_API_KEY}`)
         const data = await res.json()
         if (data.total === 0) {

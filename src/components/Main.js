@@ -12,15 +12,15 @@ function Main() {
           <h1>How to use our Website</h1>
           <ol>
             <li>
-              <span className="main--guide--details--step-number">1</span>
+              <div className="main--guide--details--step-number">1</div>
               <div className='main--guide--details--description'>Search Any Image</div>
             </li>
             <li>
-              <span className="main--guide--details--step-number">2</span>
+              <div className="main--guide--details--step-number">2</div>
               <div className='main--guide--details--description'>Like Images</div>
             </li>
             <li>
-              <span className="main--guide--details--step-number">3</span>
+              <div className="main--guide--details--step-number">3</div>
               <div className='main--guide--details--description'>View Liked Images on Favorites Page</div>
             </li>
           </ol>
