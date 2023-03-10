@@ -191,9 +191,54 @@ input:checked + .nav--toggle--slider:before {
   margin: 0;
 }
 
-.main--empty {
+.main--guide {
   /* 149.82, height of nav + header */
   height: calc(100vh - 149.82px);
+  display: flex;
+  justify-content: center;
+  padding-top: 200px;
+}
+
+.main--guide--details > h1 {
+  text-align: center;
+  font-size: 23px;
+  margin-bottom: 15px;
+}
+
+.main--guide--details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main--guide--details li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.main--guide--details--step-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4E5A71;
+  color: #fff;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.main--guide--details--description {
+  background-color: rgba(128, 128, 128, 0.281);
+  font-size: 20px;
+  padding: 0px 5px;
+  border-radius: 2px;
+  display: inline-block;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .image-list {
@@ -354,6 +399,10 @@ input:checked + .nav--toggle--slider:before {
     margin-top: 11.44px;
     margin-bottom: 3.23px;
     font-size: 2em;
+  }
+
+  .main--guide--details--description {
+    max-width: 57%;
   }
 
   .image-container > button {
